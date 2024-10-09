@@ -107,7 +107,8 @@ F_s_hat <- function(Y, d, t, X, X.new, trt=1,s, gamma=0){
   var_error.second.inc<- vector(length=length(s))
   
   
-  for(i in 1:length(s)){
+ 
+   for(i in 1:length(s)){
     S_t_s <- S_t_s_mat[i,trt.ind==1]
     F_t_s <- 1-S_t_s
     S_t0_s <- S_t_s_mat[i,trt.ind==0]
