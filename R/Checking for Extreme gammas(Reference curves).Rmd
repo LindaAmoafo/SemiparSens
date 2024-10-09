@@ -1,0 +1,85 @@
+---
+title: "Checking for extreme values"
+author: "Linda Amoafo"
+date: "2023-09-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(gridExtra)
+library(RColorBrewer)
+```
+
+By law of total probability, 
+$$P[Y(1) < s] = P[Y(1) < s | T=1] P[T=1] + P[Y(1) < s | T=0] P[T=0]$$
+compute $P[Y(1) < s]$ using 
+$$\frac{1}{n} \sum_{i=1}^n \left \{F_t(s|X_i) \pi_t(X_i) + \frac{F_t(s|X_i) exp(\gamma)}{S_t(s|X_i) + F_t(s|X_i)* exp(\gamma)}\pi_{1-t}(X_i) \right\}$$
+where,
+$F_t(s|X_i)= P[Y(1) < s | T=1, X_i=x_i]$
+$S_t(s|X_i)= 1- F_t(s|X_i)$
+$\pi_t(X_i)= P[T=1| X_i=x_i]$
+$\pi_{1-t}(X_i)= 1-\pi_t(X_i)$
+
+Compute $P[Y(1) < s | T=1] $ with the Kaplan Meier without $X$ and for only treated groups.
+Compute $P[T=1]$ as the proportion of the data with $T=1$
+and now find $$P[Y(1) < s | T=0]$$
+
+
+```{r}
+tictoc::tic()
+EBRT_counterfactual <- lapply(-seq(0,3,0.1),
+                              \(x) counterfactual(Y,d,t,X,trt=1,s=NULL, gamma=x))
+
+EBRT_counter_prob <- do.call(cbind, lapply(EBRT_counterfactual, \(x) x[,"counter"]))
+colnames(EBRT_counter_prob) <- paste0("Gamma = ",-seq(0,3,0.1))
+s <- unique(sort(pmin(Y[t==1 & d==1], 150), decreasing =FALSE))
+EBRT_counter <- data.table(Time=s,EBRT_counter_prob, Treatment = "EBRT + AD", Curve="Induced Curve")
+EBRT_prob <- data.table(Time=s, `Survival Probability` = EBRT_counterfactual[[1]][,"prob_fit"],
+                        Treatment = "EBRT + AD", Curve="Induced Curve", Estimates = "P[Y(t) \u2265 s | T=t]")
+
+
+RP_counterfactual <- lapply(seq(0,3,0.1),
+                            \(x) counterfactual(Y,d,t,X,trt=0,s=NULL, gamma=x))
+
+RP_counter_prob <- do.call(cbind, lapply(RP_counterfactual, \(x) x[,"counter"]))
+colnames(RP_counter_prob) <- paste0("Gamma = ", seq(0,3,0.1))
+s <- unique(sort(pmin(Y[t==0 & d==1], 150), decreasing =FALSE))
+RP_counter <- data.table(Time=s, RP_counter_prob, Treatment = "RP", Curve="Induced Curve")
+RP_prob <- data.table(Time=s, `Survival Probability` = RP_counterfactual[[1]][,"prob_fit"],
+                        Treatment = "RP", Curve="Induced Curve", Estimates = "P[Y(t) \u2265 s | T=t]")
+
+tictoc::toc()
+
+```
+
+
+```{r}
+## Put data together for plot
+Counter.plot.dat <- bind_rows(
+  pivot_longer(EBRT_counter |> 
+                 select(c(Time, Treatment,Curve, "Gamma = 0", "Gamma = -0.5", "Gamma = -1",
+                          "Gamma = -1.5" ,"Gamma = -2","Gamma = -2.5")),
+               cols = c("Gamma = 0", "Gamma = -0.5", "Gamma = -1","Gamma = -1.5","Gamma = -2","Gamma = -2.5"), 
+                        values_to = "Survival Probability", names_to = "Estimates"),
+  EBRT_prob,
+  pivot_longer(RP_counter |> 
+                 select(c(Time, Treatment, Curve, "Gamma = 0", "Gamma = 0.5", "Gamma = 1",
+                          "Gamma = 1.5")), 
+                        cols = c("Gamma = 0", "Gamma = 0.5", "Gamma = 1","Gamma = 1.5"), 
+                        values_to = "Survival Probability", names_to = "Estimates"),
+  RP_prob)  |> 
+  mutate(Estimates = factor(Estimates,levels = c("P[Y(t) \u2265 s | T=t]", "Gamma = 0", "Gamma = 0.5",
+                                                 "Gamma = 1","Gamma = 1.5",
+                                       "Gamma = -0.5", "Gamma = -1", "Gamma = -1.5", "Gamma = -2","Gamma = -2.5")))
+
+
+#Prob.plot.dat <- bind_rows(EBRT_prob ,RP_prob) |> mutate(Estimates= "P[Y(t)<= s | T=t]")
+
+Counter.plot.data <- Counter.plot.dat %>% 
+  mutate(`Treatment` = factor(`Treatment`, levels= c("RP", "EBRT + AD")),
+         Estimates = factor(Estimates, levels = c("P[Y(t) \u2265 s | T=t]","Gamma = 0", "Gamma = 0.5", "Gamma = 1", "Gamma = 1.5","Gamma = -0.5", "Gamma = -1", "Gamma = -1.5", "Gamma = -2","Gamma = -2.5")))
+```
+
+
+

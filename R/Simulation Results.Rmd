@@ -1,0 +1,1261 @@
+---
+title: "Untitled"
+author: "Linda Amoafo"
+date: "2023-11-16"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(gridExtra)
+library(readxl)
+```
+
+Put simulation results together after CHPC run.
+
+```{r}
+## EBRT GAMMA 0
+myfiles.EBRT.New_1000.simG0<-dir(path="New/EBRT/BootstrapCI/New_fun/Sample_1000/Gamma_0",pattern = "file")
+
+mylist.EBRT.New_1000.simG0 <- lapply(myfiles.EBRT.New_1000.simG0, function(x) {
+ read.csv(file=paste("New/EBRT/BootstrapCI/New_fun/Sample_1000/Gamma_0/",x, sep=""))[,-1]
+})
+mylist.EBRT.New_1000.simG0[[1]]
+pava.EBRT.New_1000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG0, \(x)x[,"pava.Est"]))
+Std_error.EBRT.New_1000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG0, \(x)x[,"Std_error"]))
+Lower.EBRT.New_1000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG0, \(x)x[,"Lower.Limit.logit"]))
+Upper.EBRT.New_1000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG0, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.EBRT.New_1000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG0, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.EBRT.New_1000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG0,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.EBRT.New_1000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG0, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.EBRT.New_1000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG0, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.EBRT.New_1000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG0, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.EBRT.New_1000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG0, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.EBRT.New_1000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG0, \(x)x[,"C_j"]))
+
+
+
+## EBRT GAMMA 1
+myfiles.EBRT.New_1000.simG1<-dir(path="New/EBRT/BootstrapCI/New_fun/Sample_1000/Gamma_1",pattern = "file")
+
+mylist.EBRT.New_1000.simG1 <- lapply(myfiles.EBRT.New_1000.simG1, function(x) {
+ read.csv(file=paste("New/EBRT/BootstrapCI/New_fun/Sample_1000/Gamma_1/",x, sep=""))[,-1]
+})
+mylist.EBRT.New_1000.simG1[[1]]
+pava.EBRT.New_1000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG1, \(x)x[,"pava.Est"]))
+Std_error.EBRT.New_1000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG1, \(x)x[,"Std_error"]))
+Lower.EBRT.New_1000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG1, \(x)x[,"Lower.Limit.logit"]))
+Upper.EBRT.New_1000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG1, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.EBRT.New_1000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG1, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.EBRT.New_1000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG1,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.EBRT.New_1000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG1, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.EBRT.New_1000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG1, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.EBRT.New_1000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG1, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.EBRT.New_1000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG1, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.EBRT.New_1000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG1, \(x)x[,"C_j"]))
+
+
+## EBRT GAMMA 2
+myfiles.EBRT.New_1000.simG2<-dir(path="New/EBRT/BootstrapCI/New_fun/Sample_1000/Gamma_2",pattern = "file")
+
+mylist.EBRT.New_1000.simG2 <- lapply(myfiles.EBRT.New_1000.simG2, function(x) {
+ read.csv(file=paste("New/EBRT/BootstrapCI/New_fun/Sample_1000/Gamma_2/",x, sep=""))[,-1]
+})
+mylist.EBRT.New_1000.simG2[[1]]
+pava.EBRT.New_1000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG2, \(x)x[,"pava.Est"]))
+Std_error.EBRT.New_1000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG2, \(x)x[,"Std_error"]))
+Lower.EBRT.New_1000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG2, \(x)x[,"Lower.Limit.logit"]))
+Upper.EBRT.New_1000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG2, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.EBRT.New_1000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG2, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.EBRT.New_1000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG2,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.EBRT.New_1000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG2, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.EBRT.New_1000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG2, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.EBRT.New_1000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG2, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.EBRT.New_1000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG2, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.EBRT.New_1000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG2, \(x)x[,"C_j"]))
+
+
+
+## EBRT GAMMA 3
+myfiles.EBRT.New_1000.simG3<-dir(path="New/EBRT/BootstrapCI/New_fun/Sample_1000/Gamma_3",pattern = "file")
+
+mylist.EBRT.New_1000.simG3 <- lapply(myfiles.EBRT.New_1000.simG3, function(x) {
+ read.csv(file=paste("New/EBRT/BootstrapCI/New_fun/Sample_1000/Gamma_3/",x, sep=""))[,-1]
+})
+mylist.EBRT.New_1000.simG3[[1]]
+pava.EBRT.New_1000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG3, \(x)x[,"pava.Est"]))
+Std_error.EBRT.New_1000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG3, \(x)x[,"Std_error"]))
+Lower.EBRT.New_1000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG3, \(x)x[,"Lower.Limit.logit"]))
+Upper.EBRT.New_1000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG3, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.EBRT.New_1000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG3, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.EBRT.New_1000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG3,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.EBRT.New_1000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG3, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.EBRT.New_1000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG3, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.EBRT.New_1000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG3, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.EBRT.New_1000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG3, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.EBRT.New_1000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_1000.simG3, \(x)x[,"C_j"]))
+
+
+
+## RP GAMMA 0
+myfiles.RP.New_1000.simG0<-dir(path="New/RP/BootstrapCI/New_fun/Sample_1000/Gamma_0",pattern = "file")
+
+mylist.RP.New_1000.simG0 <- lapply(myfiles.RP.New_1000.simG0, function(x) {
+ read.csv(file=paste("New/RP/BootstrapCI/New_fun/Sample_1000/Gamma_0/",x, sep=""))[,-1]
+})
+mylist.RP.New_1000.simG0[[1]]
+pava.RP.New_1000.simG0 <- do.call(cbind,lapply(mylist.RP.New_1000.simG0, \(x)x[,"pava.Est"]))
+Std_error.RP.New_1000.simG0 <- do.call(cbind,lapply(mylist.RP.New_1000.simG0, \(x)x[,"Std_error"]))
+Lower.RP.New_1000.simG0 <- do.call(cbind,lapply(mylist.RP.New_1000.simG0, \(x)x[,"Lower.Limit.logit"]))
+Upper.RP.New_1000.simG0 <- do.call(cbind,lapply(mylist.RP.New_1000.simG0, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.RP.New_1000.simG0 <- do.call(cbind,lapply(mylist.RP.New_1000.simG0, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.RP.New_1000.simG0 <- do.call(cbind,lapply(mylist.RP.New_1000.simG0,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.RP.New_1000.simG0 <- do.call(cbind,lapply(mylist.RP.New_1000.simG0, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.RP.New_1000.simG0 <- do.call(cbind,lapply(mylist.RP.New_1000.simG0, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.RP.New_1000.simG0 <- do.call(cbind,lapply(mylist.RP.New_1000.simG0, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.RP.New_1000.simG0 <- do.call(cbind,lapply(mylist.RP.New_1000.simG0, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.RP.New_1000.simG0 <- do.call(cbind,lapply(mylist.RP.New_1000.simG0, \(x)x[,"C_j"]))
+
+
+
+## RP GAMMA 1
+myfiles.RP.New_1000.simG1<-dir(path="New/RP/BootstrapCI/New_fun/Sample_1000/Gamma_1",pattern = "file")
+
+mylist.RP.New_1000.simG1 <- lapply(myfiles.RP.New_1000.simG1, function(x) {
+ read.csv(file=paste("New/RP/BootstrapCI/New_fun/Sample_1000/Gamma_1/",x, sep=""))[,-1]
+})
+mylist.RP.New_1000.simG1[[1]]
+pava.RP.New_1000.simG1 <- do.call(cbind,lapply(mylist.RP.New_1000.simG1, \(x)x[,"pava.Est"]))
+Std_error.RP.New_1000.simG1 <- do.call(cbind,lapply(mylist.RP.New_1000.simG1, \(x)x[,"Std_error"]))
+Lower.RP.New_1000.simG1 <- do.call(cbind,lapply(mylist.RP.New_1000.simG1, \(x)x[,"Lower.Limit.logit"]))
+Upper.RP.New_1000.simG1 <- do.call(cbind,lapply(mylist.RP.New_1000.simG1, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.RP.New_1000.simG1 <- do.call(cbind,lapply(mylist.RP.New_1000.simG1, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.RP.New_1000.simG1 <- do.call(cbind,lapply(mylist.RP.New_1000.simG1,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.RP.New_1000.simG1 <- do.call(cbind,lapply(mylist.RP.New_1000.simG1, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.RP.New_1000.simG1 <- do.call(cbind,lapply(mylist.RP.New_1000.simG1, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.RP.New_1000.simG1 <- do.call(cbind,lapply(mylist.RP.New_1000.simG1, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.RP.New_1000.simG1 <- do.call(cbind,lapply(mylist.RP.New_1000.simG1, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.RP.New_1000.simG1 <- do.call(cbind,lapply(mylist.RP.New_1000.simG1, \(x)x[,"C_j"]))
+
+
+## RP GAMMA 2
+myfiles.RP.New_1000.simG2<-dir(path="New/RP/BootstrapCI/New_fun/Sample_1000/Gamma_2",pattern = "file")
+
+mylist.RP.New_1000.simG2 <- lapply(myfiles.RP.New_1000.simG2, function(x) {
+ read.csv(file=paste("New/RP/BootstrapCI/New_fun/Sample_1000/Gamma_2/",x, sep=""))[,-1]
+})
+mylist.RP.New_1000.simG2[[1]]
+pava.RP.New_1000.simG2 <- do.call(cbind,lapply(mylist.RP.New_1000.simG2, \(x)x[,"pava.Est"]))
+Std_error.RP.New_1000.simG2 <- do.call(cbind,lapply(mylist.RP.New_1000.simG2, \(x)x[,"Std_error"]))
+Lower.RP.New_1000.simG2 <- do.call(cbind,lapply(mylist.RP.New_1000.simG2, \(x)x[,"Lower.Limit.logit"]))
+Upper.RP.New_1000.simG2 <- do.call(cbind,lapply(mylist.RP.New_1000.simG2, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.RP.New_1000.simG2 <- do.call(cbind,lapply(mylist.RP.New_1000.simG2, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.RP.New_1000.simG2 <- do.call(cbind,lapply(mylist.RP.New_1000.simG2,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.RP.New_1000.simG2 <- do.call(cbind,lapply(mylist.RP.New_1000.simG2, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.RP.New_1000.simG2 <- do.call(cbind,lapply(mylist.RP.New_1000.simG2, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.RP.New_1000.simG2 <- do.call(cbind,lapply(mylist.RP.New_1000.simG2, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.RP.New_1000.simG2 <- do.call(cbind,lapply(mylist.RP.New_1000.simG2, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.RP.New_1000.simG2 <- do.call(cbind,lapply(mylist.RP.New_1000.simG2, \(x)x[,"C_j"]))
+
+
+
+## RP GAMMA 3
+myfiles.RP.New_1000.simG3<-dir(path="New/RP/BootstrapCI/New_fun/Sample_1000/Gamma_3",pattern = "file")
+
+mylist.RP.New_1000.simG3 <- lapply(myfiles.RP.New_1000.simG3, function(x) {
+ read.csv(file=paste("New/RP/BootstrapCI/New_fun/Sample_1000/Gamma_3/",x, sep=""))[,-1]
+})
+mylist.RP.New_1000.simG3[[1]]
+pava.RP.New_1000.simG3 <- do.call(cbind,lapply(mylist.RP.New_1000.simG3, \(x)x[,"pava.Est"]))
+Std_error.RP.New_1000.simG3 <- do.call(cbind,lapply(mylist.RP.New_1000.simG3, \(x)x[,"Std_error"]))
+Lower.RP.New_1000.simG3 <- do.call(cbind,lapply(mylist.RP.New_1000.simG3, \(x)x[,"Lower.Limit.logit"]))
+Upper.RP.New_1000.simG3 <- do.call(cbind,lapply(mylist.RP.New_1000.simG3, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.RP.New_1000.simG3 <- do.call(cbind,lapply(mylist.RP.New_1000.simG3, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.RP.New_1000.simG3 <- do.call(cbind,lapply(mylist.RP.New_1000.simG3,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.RP.New_1000.simG3 <- do.call(cbind,lapply(mylist.RP.New_1000.simG3, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.RP.New_1000.simG3 <- do.call(cbind,lapply(mylist.RP.New_1000.simG3, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.RP.New_1000.simG3 <- do.call(cbind,lapply(mylist.RP.New_1000.simG3, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.RP.New_1000.simG3 <- do.call(cbind,lapply(mylist.RP.New_1000.simG3, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.RP.New_1000.simG3 <- do.call(cbind,lapply(mylist.RP.New_1000.simG3, \(x)x[,"C_j"]))
+
+```
+Sample Size 3000
+
+```{r}
+## EBRT GAMMA 0
+myfiles.EBRT.New_3000.simG0<-dir(path="New/EBRT/BootstrapCI/New_fun/Sample_3000/Gamma_0",pattern = "file")
+
+mylist.EBRT.New_3000.simG0 <- lapply(myfiles.EBRT.New_3000.simG0, function(x) {
+ read.csv(file=paste("New/EBRT/BootstrapCI/New_fun/Sample_3000/Gamma_0/",x, sep=""))[,-1]
+})
+mylist.EBRT.New_3000.simG0[[1]]
+pava.EBRT.New_3000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG0, \(x)x[,"pava.Est"]))
+Std_error.EBRT.New_3000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG0, \(x)x[,"Std_error"]))
+Lower.EBRT.New_3000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG0, \(x)x[,"Lower.Limit.logit"]))
+Upper.EBRT.New_3000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG0, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.EBRT.New_3000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG0, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.EBRT.New_3000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG0,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.EBRT.New_3000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG0, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.EBRT.New_3000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG0, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.EBRT.New_3000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG0, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.EBRT.New_3000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG0, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.EBRT.New_3000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG0, \(x)x[,"C_j"]))
+
+
+
+## EBRT GAMMA 1
+myfiles.EBRT.New_3000.simG1<-dir(path="New/EBRT/BootstrapCI/New_fun/Sample_3000/Gamma_1",pattern = "file")
+
+mylist.EBRT.New_3000.simG1 <- lapply(myfiles.EBRT.New_3000.simG1, function(x) {
+ read.csv(file=paste("New/EBRT/BootstrapCI/New_fun/Sample_3000/Gamma_1/",x, sep=""))[,-1]
+})
+mylist.EBRT.New_3000.simG1[[1]]
+pava.EBRT.New_3000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG1, \(x)x[,"pava.Est"]))
+Std_error.EBRT.New_3000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG1, \(x)x[,"Std_error"]))
+Lower.EBRT.New_3000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG1, \(x)x[,"Lower.Limit.logit"]))
+Upper.EBRT.New_3000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG1, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.EBRT.New_3000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG1, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.EBRT.New_3000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG1,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.EBRT.New_3000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG1, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.EBRT.New_3000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG1, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.EBRT.New_3000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG1, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.EBRT.New_3000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG1, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.EBRT.New_3000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG1, \(x)x[,"C_j"]))
+
+
+## EBRT GAMMA 2
+myfiles.EBRT.New_3000.simG2<-dir(path="New/EBRT/BootstrapCI/New_fun/Sample_3000/Gamma_2",pattern = "file")
+
+mylist.EBRT.New_3000.simG2 <- lapply(myfiles.EBRT.New_3000.simG2, function(x) {
+ read.csv(file=paste("New/EBRT/BootstrapCI/New_fun/Sample_3000/Gamma_2/",x, sep=""))[,-1]
+})
+mylist.EBRT.New_3000.simG2[[1]]
+pava.EBRT.New_3000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG2, \(x)x[,"pava.Est"]))
+Std_error.EBRT.New_3000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG2, \(x)x[,"Std_error"]))
+Lower.EBRT.New_3000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG2, \(x)x[,"Lower.Limit.logit"]))
+Upper.EBRT.New_3000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG2, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.EBRT.New_3000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG2, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.EBRT.New_3000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG2,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.EBRT.New_3000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG2, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.EBRT.New_3000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG2, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.EBRT.New_3000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG2, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.EBRT.New_3000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG2, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.EBRT.New_3000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG2, \(x)x[,"C_j"]))
+
+
+
+## EBRT GAMMA 3
+myfiles.EBRT.New_3000.simG3<-dir(path="New/EBRT/BootstrapCI/New_fun/Sample_3000/Gamma_3",pattern = "file")
+
+mylist.EBRT.New_3000.simG3 <- lapply(myfiles.EBRT.New_3000.simG3, function(x) {
+ read.csv(file=paste("New/EBRT/BootstrapCI/New_fun/Sample_3000/Gamma_3/",x, sep=""))[,-1]
+})
+mylist.EBRT.New_3000.simG3[[1]]
+pava.EBRT.New_3000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG3, \(x)x[,"pava.Est"]))
+Std_error.EBRT.New_3000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG3, \(x)x[,"Std_error"]))
+Lower.EBRT.New_3000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG3, \(x)x[,"Lower.Limit.logit"]))
+Upper.EBRT.New_3000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG3, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.EBRT.New_3000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG3, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.EBRT.New_3000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG3,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.EBRT.New_3000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG3, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.EBRT.New_3000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG3, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.EBRT.New_3000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG3, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.EBRT.New_3000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG3, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.EBRT.New_3000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_3000.simG3, \(x)x[,"C_j"]))
+
+
+
+## RP GAMMA 0
+myfiles.RP.New_3000.simG0<-dir(path="New/RP/BootstrapCI/New_fun/Sample_3000/Gamma_0",pattern = "file")
+
+mylist.RP.New_3000.simG0 <- lapply(myfiles.RP.New_3000.simG0, function(x) {
+ read.csv(file=paste("New/RP/BootstrapCI/New_fun/Sample_3000/Gamma_0/",x, sep=""))[,-1]
+})
+mylist.RP.New_3000.simG0[[1]]
+pava.RP.New_3000.simG0 <- do.call(cbind,lapply(mylist.RP.New_3000.simG0, \(x)x[,"pava.Est"]))
+Std_error.RP.New_3000.simG0 <- do.call(cbind,lapply(mylist.RP.New_3000.simG0, \(x)x[,"Std_error"]))
+Lower.RP.New_3000.simG0 <- do.call(cbind,lapply(mylist.RP.New_3000.simG0, \(x)x[,"Lower.Limit.logit"]))
+Upper.RP.New_3000.simG0 <- do.call(cbind,lapply(mylist.RP.New_3000.simG0, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.RP.New_3000.simG0 <- do.call(cbind,lapply(mylist.RP.New_3000.simG0, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.RP.New_3000.simG0 <- do.call(cbind,lapply(mylist.RP.New_3000.simG0,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.RP.New_3000.simG0 <- do.call(cbind,lapply(mylist.RP.New_3000.simG0, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.RP.New_3000.simG0 <- do.call(cbind,lapply(mylist.RP.New_3000.simG0, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.RP.New_3000.simG0 <- do.call(cbind,lapply(mylist.RP.New_3000.simG0, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.RP.New_3000.simG0 <- do.call(cbind,lapply(mylist.RP.New_3000.simG0, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.RP.New_3000.simG0 <- do.call(cbind,lapply(mylist.RP.New_3000.simG0, \(x)x[,"C_j"]))
+
+
+
+## RP GAMMA 1
+myfiles.RP.New_3000.simG1<-dir(path="New/RP/BootstrapCI/New_fun/Sample_3000/Gamma_1",pattern = "file")
+
+mylist.RP.New_3000.simG1 <- lapply(myfiles.RP.New_3000.simG1, function(x) {
+ read.csv(file=paste("New/RP/BootstrapCI/New_fun/Sample_3000/Gamma_1/",x, sep=""))[,-1]
+})
+mylist.RP.New_3000.simG1[[1]]
+pava.RP.New_3000.simG1 <- do.call(cbind,lapply(mylist.RP.New_3000.simG1, \(x)x[,"pava.Est"]))
+Std_error.RP.New_3000.simG1 <- do.call(cbind,lapply(mylist.RP.New_3000.simG1, \(x)x[,"Std_error"]))
+Lower.RP.New_3000.simG1 <- do.call(cbind,lapply(mylist.RP.New_3000.simG1, \(x)x[,"Lower.Limit.logit"]))
+Upper.RP.New_3000.simG1 <- do.call(cbind,lapply(mylist.RP.New_3000.simG1, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.RP.New_3000.simG1 <- do.call(cbind,lapply(mylist.RP.New_3000.simG1, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.RP.New_3000.simG1 <- do.call(cbind,lapply(mylist.RP.New_3000.simG1,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.RP.New_3000.simG1 <- do.call(cbind,lapply(mylist.RP.New_3000.simG1, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.RP.New_3000.simG1 <- do.call(cbind,lapply(mylist.RP.New_3000.simG1, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.RP.New_3000.simG1 <- do.call(cbind,lapply(mylist.RP.New_3000.simG1, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.RP.New_3000.simG1 <- do.call(cbind,lapply(mylist.RP.New_3000.simG1, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.RP.New_3000.simG1 <- do.call(cbind,lapply(mylist.RP.New_3000.simG1, \(x)x[,"C_j"]))
+
+
+## RP GAMMA 2
+myfiles.RP.New_3000.simG2<-dir(path="New/RP/BootstrapCI/New_fun/Sample_3000/Gamma_2",pattern = "file")
+
+mylist.RP.New_3000.simG2 <- lapply(myfiles.RP.New_3000.simG2, function(x) {
+ read.csv(file=paste("New/RP/BootstrapCI/New_fun/Sample_3000/Gamma_2/",x, sep=""))[,-1]
+})
+mylist.RP.New_3000.simG2[[1]]
+pava.RP.New_3000.simG2 <- do.call(cbind,lapply(mylist.RP.New_3000.simG2, \(x)x[,"pava.Est"]))
+Std_error.RP.New_3000.simG2 <- do.call(cbind,lapply(mylist.RP.New_3000.simG2, \(x)x[,"Std_error"]))
+Lower.RP.New_3000.simG2 <- do.call(cbind,lapply(mylist.RP.New_3000.simG2, \(x)x[,"Lower.Limit.logit"]))
+Upper.RP.New_3000.simG2 <- do.call(cbind,lapply(mylist.RP.New_3000.simG2, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.RP.New_3000.simG2 <- do.call(cbind,lapply(mylist.RP.New_3000.simG2, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.RP.New_3000.simG2 <- do.call(cbind,lapply(mylist.RP.New_3000.simG2,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.RP.New_3000.simG2 <- do.call(cbind,lapply(mylist.RP.New_3000.simG2, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.RP.New_3000.simG2 <- do.call(cbind,lapply(mylist.RP.New_3000.simG2, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.RP.New_3000.simG2 <- do.call(cbind,lapply(mylist.RP.New_3000.simG2, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.RP.New_3000.simG2 <- do.call(cbind,lapply(mylist.RP.New_3000.simG2, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.RP.New_3000.simG2 <- do.call(cbind,lapply(mylist.RP.New_3000.simG2, \(x)x[,"C_j"]))
+
+
+
+## RP GAMMA 3
+myfiles.RP.New_3000.simG3<-dir(path="New/RP/BootstrapCI/New_fun/Sample_3000/Gamma_3",pattern = "file")
+
+mylist.RP.New_3000.simG3 <- lapply(myfiles.RP.New_3000.simG3, function(x) {
+ read.csv(file=paste("New/RP/BootstrapCI/New_fun/Sample_3000/Gamma_3/",x, sep=""))[,-1]
+})
+mylist.RP.New_3000.simG3[[1]]
+pava.RP.New_3000.simG3 <- do.call(cbind,lapply(mylist.RP.New_3000.simG3, \(x)x[,"pava.Est"]))
+Std_error.RP.New_3000.simG3 <- do.call(cbind,lapply(mylist.RP.New_3000.simG3, \(x)x[,"Std_error"]))
+Lower.RP.New_3000.simG3 <- do.call(cbind,lapply(mylist.RP.New_3000.simG3, \(x)x[,"Lower.Limit.logit"]))
+Upper.RP.New_3000.simG3 <- do.call(cbind,lapply(mylist.RP.New_3000.simG3, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.RP.New_3000.simG3 <- do.call(cbind,lapply(mylist.RP.New_3000.simG3, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.RP.New_3000.simG3 <- do.call(cbind,lapply(mylist.RP.New_3000.simG3,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.RP.New_3000.simG3 <- do.call(cbind,lapply(mylist.RP.New_3000.simG3, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.RP.New_3000.simG3 <- do.call(cbind,lapply(mylist.RP.New_3000.simG3, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.RP.New_3000.simG3 <- do.call(cbind,lapply(mylist.RP.New_3000.simG3, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.RP.New_3000.simG3 <- do.call(cbind,lapply(mylist.RP.New_3000.simG3, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.RP.New_3000.simG3 <- do.call(cbind,lapply(mylist.RP.New_3000.simG3, \(x)x[,"C_j"]))
+
+```
+
+
+Sample 5000
+```{r}
+## EBRT GAMMA 0
+myfiles.EBRT.New_5000.simG0<-dir(path="New/EBRT/BootstrapCI/New_fun/Sample_5000/Gamma_0",pattern = "file")
+
+mylist.EBRT.New_5000.simG0 <- lapply(myfiles.EBRT.New_5000.simG0, function(x) {
+ read.csv(file=paste("New/EBRT/BootstrapCI/New_fun/Sample_5000/Gamma_0/",x, sep=""))[,-1]
+})
+mylist.EBRT.New_5000.simG0[[1]]
+pava.EBRT.New_5000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG0, \(x)x[,"pava.Est"]))
+Std_error.EBRT.New_5000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG0, \(x)x[,"Std_error"]))
+Lower.EBRT.New_5000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG0, \(x)x[,"Lower.Limit.logit"]))
+Upper.EBRT.New_5000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG0, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.EBRT.New_5000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG0, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.EBRT.New_5000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG0,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.EBRT.New_5000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG0, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.EBRT.New_5000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG0, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.EBRT.New_5000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG0, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.EBRT.New_5000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG0, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.EBRT.New_5000.simG0 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG0, \(x)x[,"C_j"]))
+
+
+
+## EBRT GAMMA 1
+myfiles.EBRT.New_5000.simG1<-dir(path="New/EBRT/BootstrapCI/New_fun/Sample_5000/Gamma_1",pattern = "file")
+
+mylist.EBRT.New_5000.simG1 <- lapply(myfiles.EBRT.New_5000.simG1, function(x) {
+ read.csv(file=paste("New/EBRT/BootstrapCI/New_fun/Sample_5000/Gamma_1/",x, sep=""))[,-1]
+})
+mylist.EBRT.New_5000.simG1[[1]]
+pava.EBRT.New_5000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG1, \(x)x[,"pava.Est"]))
+Std_error.EBRT.New_5000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG1, \(x)x[,"Std_error"]))
+Lower.EBRT.New_5000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG1, \(x)x[,"Lower.Limit.logit"]))
+Upper.EBRT.New_5000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG1, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.EBRT.New_5000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG1, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.EBRT.New_5000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG1,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.EBRT.New_5000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG1, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.EBRT.New_5000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG1, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.EBRT.New_5000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG1, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.EBRT.New_5000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG1, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.EBRT.New_5000.simG1 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG1, \(x)x[,"C_j"]))
+
+
+## EBRT GAMMA 2
+myfiles.EBRT.New_5000.simG2<-dir(path="New/EBRT/BootstrapCI/New_fun/Sample_5000/Gamma_2",pattern = "file")
+
+mylist.EBRT.New_5000.simG2 <- lapply(myfiles.EBRT.New_5000.simG2, function(x) {
+ read.csv(file=paste("New/EBRT/BootstrapCI/New_fun/Sample_5000/Gamma_2/",x, sep=""))[,-1]
+})
+mylist.EBRT.New_5000.simG2[[1]]
+pava.EBRT.New_5000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG2, \(x)x[,"pava.Est"]))
+Std_error.EBRT.New_5000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG2, \(x)x[,"Std_error"]))
+Lower.EBRT.New_5000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG2, \(x)x[,"Lower.Limit.logit"]))
+Upper.EBRT.New_5000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG2, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.EBRT.New_5000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG2, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.EBRT.New_5000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG2,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.EBRT.New_5000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG2, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.EBRT.New_5000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG2, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.EBRT.New_5000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG2, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.EBRT.New_5000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG2, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.EBRT.New_5000.simG2 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG2, \(x)x[,"C_j"]))
+
+
+
+## EBRT GAMMA 3
+myfiles.EBRT.New_5000.simG3<-dir(path="New/EBRT/BootstrapCI/New_fun/Sample_5000/Gamma_3",pattern = "file")
+
+mylist.EBRT.New_5000.simG3 <- lapply(myfiles.EBRT.New_5000.simG3, function(x) {
+ read.csv(file=paste("New/EBRT/BootstrapCI/New_fun/Sample_5000/Gamma_3/",x, sep=""))[,-1]
+})
+mylist.EBRT.New_5000.simG3[[1]]
+pava.EBRT.New_5000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG3, \(x)x[,"pava.Est"]))
+Std_error.EBRT.New_5000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG3, \(x)x[,"Std_error"]))
+Lower.EBRT.New_5000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG3, \(x)x[,"Lower.Limit.logit"]))
+Upper.EBRT.New_5000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG3, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.EBRT.New_5000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG3, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.EBRT.New_5000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG3,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.EBRT.New_5000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG3, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.EBRT.New_5000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG3, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.EBRT.New_5000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG3, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.EBRT.New_5000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG3, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.EBRT.New_5000.simG3 <- do.call(cbind,lapply(mylist.EBRT.New_5000.simG3, \(x)x[,"C_j"]))
+
+
+
+## RP GAMMA 0
+myfiles.RP.New_5000.simG0<-dir(path="New/RP/BootstrapCI/New_fun/Sample_5000/Gamma_0",pattern = "file")
+
+mylist.RP.New_5000.simG0 <- lapply(myfiles.RP.New_5000.simG0, function(x) {
+ read.csv(file=paste("New/RP/BootstrapCI/New_fun/Sample_5000/Gamma_0/",x, sep=""))[,-1]
+})
+mylist.RP.New_5000.simG0[[1]]
+pava.RP.New_5000.simG0 <- do.call(cbind,lapply(mylist.RP.New_5000.simG0, \(x)x[,"pava.Est"]))
+Std_error.RP.New_5000.simG0 <- do.call(cbind,lapply(mylist.RP.New_5000.simG0, \(x)x[,"Std_error"]))
+Lower.RP.New_5000.simG0 <- do.call(cbind,lapply(mylist.RP.New_5000.simG0, \(x)x[,"Lower.Limit.logit"]))
+Upper.RP.New_5000.simG0 <- do.call(cbind,lapply(mylist.RP.New_5000.simG0, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.RP.New_5000.simG0 <- do.call(cbind,lapply(mylist.RP.New_5000.simG0, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.RP.New_5000.simG0 <- do.call(cbind,lapply(mylist.RP.New_5000.simG0,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.RP.New_5000.simG0 <- do.call(cbind,lapply(mylist.RP.New_5000.simG0, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.RP.New_5000.simG0 <- do.call(cbind,lapply(mylist.RP.New_5000.simG0, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.RP.New_5000.simG0 <- do.call(cbind,lapply(mylist.RP.New_5000.simG0, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.RP.New_5000.simG0 <- do.call(cbind,lapply(mylist.RP.New_5000.simG0, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.RP.New_5000.simG0 <- do.call(cbind,lapply(mylist.RP.New_5000.simG0, \(x)x[,"C_j"]))
+
+
+
+## RP GAMMA 1
+myfiles.RP.New_5000.simG1<-dir(path="New/RP/BootstrapCI/New_fun/Sample_5000/Gamma_1",pattern = "file")
+
+mylist.RP.New_5000.simG1 <- lapply(myfiles.RP.New_5000.simG1, function(x) {
+ read.csv(file=paste("New/RP/BootstrapCI/New_fun/Sample_5000/Gamma_1/",x, sep=""))[,-1]
+})
+mylist.RP.New_5000.simG1[[1]]
+pava.RP.New_5000.simG1 <- do.call(cbind,lapply(mylist.RP.New_5000.simG1, \(x)x[,"pava.Est"]))
+Std_error.RP.New_5000.simG1 <- do.call(cbind,lapply(mylist.RP.New_5000.simG1, \(x)x[,"Std_error"]))
+Lower.RP.New_5000.simG1 <- do.call(cbind,lapply(mylist.RP.New_5000.simG1, \(x)x[,"Lower.Limit.logit"]))
+Upper.RP.New_5000.simG1 <- do.call(cbind,lapply(mylist.RP.New_5000.simG1, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.RP.New_5000.simG1 <- do.call(cbind,lapply(mylist.RP.New_5000.simG1, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.RP.New_5000.simG1 <- do.call(cbind,lapply(mylist.RP.New_5000.simG1,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.RP.New_5000.simG1 <- do.call(cbind,lapply(mylist.RP.New_5000.simG1, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.RP.New_5000.simG1 <- do.call(cbind,lapply(mylist.RP.New_5000.simG1, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.RP.New_5000.simG1 <- do.call(cbind,lapply(mylist.RP.New_5000.simG1, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.RP.New_5000.simG1 <- do.call(cbind,lapply(mylist.RP.New_5000.simG1, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.RP.New_5000.simG1 <- do.call(cbind,lapply(mylist.RP.New_5000.simG1, \(x)x[,"C_j"]))
+
+
+## RP GAMMA 2
+myfiles.RP.New_5000.simG2<-dir(path="New/RP/BootstrapCI/New_fun/Sample_5000/Gamma_2",pattern = "file")
+
+mylist.RP.New_5000.simG2 <- lapply(myfiles.RP.New_5000.simG2, function(x) {
+ read.csv(file=paste("New/RP/BootstrapCI/New_fun/Sample_5000/Gamma_2/",x, sep=""))[,-1]
+})
+mylist.RP.New_5000.simG2[[1]]
+pava.RP.New_5000.simG2 <- do.call(cbind,lapply(mylist.RP.New_5000.simG2, \(x)x[,"pava.Est"]))
+Std_error.RP.New_5000.simG2 <- do.call(cbind,lapply(mylist.RP.New_5000.simG2, \(x)x[,"Std_error"]))
+Lower.RP.New_5000.simG2 <- do.call(cbind,lapply(mylist.RP.New_5000.simG2, \(x)x[,"Lower.Limit.logit"]))
+Upper.RP.New_5000.simG2 <- do.call(cbind,lapply(mylist.RP.New_5000.simG2, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.RP.New_5000.simG2 <- do.call(cbind,lapply(mylist.RP.New_5000.simG2, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.RP.New_5000.simG2 <- do.call(cbind,lapply(mylist.RP.New_5000.simG2,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.RP.New_5000.simG2 <- do.call(cbind,lapply(mylist.RP.New_5000.simG2, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.RP.New_5000.simG2 <- do.call(cbind,lapply(mylist.RP.New_5000.simG2, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.RP.New_5000.simG2 <- do.call(cbind,lapply(mylist.RP.New_5000.simG2, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.RP.New_5000.simG2 <- do.call(cbind,lapply(mylist.RP.New_5000.simG2, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.RP.New_5000.simG2 <- do.call(cbind,lapply(mylist.RP.New_5000.simG2, \(x)x[,"C_j"]))
+
+
+
+## RP GAMMA 3
+myfiles.RP.New_5000.simG3<-dir(path="New/RP/BootstrapCI/New_fun/Sample_5000/Gamma_3",pattern = "file")
+
+mylist.RP.New_5000.simG3 <- lapply(myfiles.RP.New_5000.simG3, function(x) {
+ read.csv(file=paste("New/RP/BootstrapCI/New_fun/Sample_5000/Gamma_3/",x, sep=""))[,-1]
+})
+mylist.RP.New_5000.simG3[[1]]
+pava.RP.New_5000.simG3 <- do.call(cbind,lapply(mylist.RP.New_5000.simG3, \(x)x[,"pava.Est"]))
+Std_error.RP.New_5000.simG3 <- do.call(cbind,lapply(mylist.RP.New_5000.simG3, \(x)x[,"Std_error"]))
+Lower.RP.New_5000.simG3 <- do.call(cbind,lapply(mylist.RP.New_5000.simG3, \(x)x[,"Lower.Limit.logit"]))
+Upper.RP.New_5000.simG3 <- do.call(cbind,lapply(mylist.RP.New_5000.simG3, \(x)x[,"Upper.Limit.logit"]))
+Boot.Lower.RP.New_5000.simG3 <- do.call(cbind,lapply(mylist.RP.New_5000.simG3, \(x)x[,"Boot.Lower.Limit"]))
+Boot.Upper.RP.New_5000.simG3 <- do.call(cbind,lapply(mylist.RP.New_5000.simG3,\(x)x[,"Boot.Upper.Limit"]))
+Sym.Boot.Lower.RP.New_5000.simG3 <- do.call(cbind,lapply(mylist.RP.New_5000.simG3, \(x)x[,"Symmetric.Boot.Lower.Limit"]))
+Sym.Boot.Upper.RP.New_5000.simG3 <- do.call(cbind,lapply(mylist.RP.New_5000.simG3, \(x)x[,"Symmetric.Boot.Upper.Limit"]))
+Sym.Boot.Lower.logit.RP.New_5000.simG3 <- do.call(cbind,lapply(mylist.RP.New_5000.simG3, \(x)x[,"Symmetric.Boot.Lower.logit"]))
+Sym.Boot.Upper.logit.RP.New_5000.simG3 <- do.call(cbind,lapply(mylist.RP.New_5000.simG3, \(x)x[,"Symmetric.Boot.Upper.logit"]))
+C_j.RP.New_5000.simG3 <- do.call(cbind,lapply(mylist.RP.New_5000.simG3, \(x)x[,"C_j"]))
+
+```
+
+```{r}
+truth <- function(Y,d,t,X,trt=0,s, gamma){
+  #d <- ifelse(Y>=150,1,d)
+  #Y <- pmin(Y,150)
+  
+  n= length(t)
+  mydata <- data.frame(Y, d, X) # make dataframe for model fitting
+  data_t <- mydata[t==trt,] # get data for treated group
+  trt.ind <- as.numeric(t==trt) # create treatment indicator variable
+  
+  gam.var <- paste(gam.variables(X), collapse = "+") ## gam variables for treatment assignment model
+  var <- paste(cox.variables(X), collapse = "+") ## cox variables for time to event models
+  
+  
+  ## fit models
+  t.fit = mgcv::gam(as.formula(paste("trt.ind ~", gam.var)), data=X, family=binomial) ## treatment model
+  #S_t = coxph( as.formula(paste("Surv(time = Y, event = d) ~", var)),  ties="breslow",
+  #             data = data_t) ## fit cox.ph model for treatment group with death status
+  S_t <- survreg(as.formula(paste("Surv(time = Y, event = d) ~", var)), dist="weibull", data = data_t) 
+  
+  ## get predictions for pi and survival probabilities
+  pi <- predict (t.fit, newdata=X, type="response") ## prob of receiving treatment
+  
+  #S_t_pred.obj <- survfit(S_t, stype=1, newdata=X, se.fit = FALSE) ## get survfit object for prediction with death 
+  
+  lp <- predict(S_t, newdata = X, type = "lp")
+  
+  S_t_s <- t(sapply(s, \(x)pweibull(x, shape = 1/S_t$scale , scale = exp(lp), lower.tail = F)))
+  #S_t_s <- summary(S_t_pred.obj, times=s, extend = TRUE)$surv  ## prediction object to get survival probabilities
+  F_t_s <- 1-S_t_s
+  
+  true_est <- (1/n) * rowSums(t(t(F_t_s)*c(pi)) + t(t((F_t_s*exp(gamma))/(S_t_s + (F_t_s*exp(gamma)))) * c(1-pi)))
+  
+  
+}
+
+## Use our data for the truth
+Y <- new_res$time
+d <- new_res$death
+X=data.frame(dplyr::select(new_res, c(age,psa,tstage, deyo,gs,insurance, income, education, race))) 
+t= as.numeric(new_res$trx)-1
+
+
+s <- seq(0,130,length.out=30)
+
+
+True_Est.EBRT.G0 <- truth(Y,d,t,X,trt=1,s=s, gamma=0)
+True_Est.EBRT.G1 <- truth(Y,d,t,X,trt=1,s=s, gamma=-1)
+True_Est.EBRT.G2 <- truth(Y,d,t,X,trt=1,s=s, gamma=-2)
+True_Est.EBRT.G3 <- truth(Y,d,t,X,trt=1,s=s, gamma=-3)
+
+True_Est.RP.G0 <- truth(Y,d,t,X,trt=0,s=s, gamma=0)
+True_Est.RP.G1 <- truth(Y,d,t,X,trt=0,s=s, gamma=1)
+True_Est.RP.G2 <- truth(Y,d,t,X,trt=0,s=s, gamma=2)
+True_Est.RP.G3 <- truth(Y,d,t,X,trt=0,s=s, gamma=3)
+
+```
+
+```{r}
+
+##AVERAGE ESTIMATE
+Est.EBRT.New_1000.G0 <- rowMeans(pava.EBRT.New_1000.simG0)
+Est.EBRT.New_1000.G1 <- rowMeans(pava.EBRT.New_1000.simG1)
+Est.EBRT.New_1000.G2 <- rowMeans(pava.EBRT.New_1000.simG2)
+Est.EBRT.New_1000.G3 <- rowMeans(pava.EBRT.New_1000.simG3)
+
+Est.RP.New_1000.G0 <- rowMeans(pava.RP.New_1000.simG0)
+Est.RP.New_1000.G1 <- rowMeans(pava.RP.New_1000.simG1)
+Est.RP.New_1000.G2 <- rowMeans(pava.RP.New_1000.simG2)
+Est.RP.New_1000.G3 <- rowMeans(pava.RP.New_1000.simG3)
+
+##STANDARD DEVIATION OF ESTIMATE
+SD_Est.EBRT.New_1000.G0 <- apply(pava.EBRT.New_1000.simG0, 1, sd)
+SD_Est.EBRT.New_1000.G1 <- apply(pava.EBRT.New_1000.simG1, 1, sd)
+SD_Est.EBRT.New_1000.G2 <- apply(pava.EBRT.New_1000.simG2, 1, sd)
+SD_Est.EBRT.New_1000.G3 <- apply(pava.EBRT.New_1000.simG3, 1, sd)
+
+SD_Est.RP.New_1000.G0 <- apply(pava.RP.New_1000.simG0, 1, sd)
+SD_Est.RP.New_1000.G1 <- apply(pava.RP.New_1000.simG1, 1, sd)
+SD_Est.RP.New_1000.G2 <- apply(pava.RP.New_1000.simG2, 1, sd)
+SD_Est.RP.New_1000.G3 <- apply(pava.RP.New_1000.simG3, 1, sd)
+
+
+##AVERAGE STANDARD ERRORS
+SDR.EBRT.New_1000.G0 <- apply(Std_error.EBRT.New_1000.simG0, 1, mean)
+SDR.EBRT.New_1000.G1 <- apply(Std_error.EBRT.New_1000.simG1, 1, mean)
+SDR.EBRT.New_1000.G2 <- apply(Std_error.EBRT.New_1000.simG2, 1, mean)
+SDR.EBRT.New_1000.G3 <- apply(Std_error.EBRT.New_1000.simG3, 1, mean)
+
+SDR.RP.New_1000.G0 <- apply(Std_error.RP.New_1000.simG0, 1, mean)
+SDR.RP.New_1000.G1 <- apply(Std_error.RP.New_1000.simG1, 1, mean)
+SDR.RP.New_1000.G2 <- apply(Std_error.RP.New_1000.simG2, 1, mean)
+SDR.RP.New_1000.G3 <- apply(Std_error.RP.New_1000.simG3, 1, mean)
+
+
+
+##COVERAGE
+coverage_funtion <- function(Lower, Upper, Truth){
+  Sim_size <- ncol(Lower)
+ sapply(1:Sim_size, function(i){((1-Upper[,i]) < (1-Truth)) & ((1-Lower[,i]) > (1-Truth))})
+}
+
+coverage_rate.EBRT.New_1000.G0 <- rowMeans(coverage_funtion(Lower.EBRT.New_1000.simG0, Upper.EBRT.New_1000.simG0, True_Est.EBRT.G0), na.rm=T)
+coverage_rate.EBRT.New_1000.G1 <- rowMeans(coverage_funtion(Lower.EBRT.New_1000.simG1, Upper.EBRT.New_1000.simG1, True_Est.EBRT.G1), na.rm=T)
+coverage_rate.EBRT.New_1000.G2 <- rowMeans(coverage_funtion(Lower.EBRT.New_1000.simG2, Upper.EBRT.New_1000.simG2, True_Est.EBRT.G2), na.rm=T)
+coverage_rate.EBRT.New_1000.G3 <- rowMeans(coverage_funtion(Lower.EBRT.New_1000.simG3, Upper.EBRT.New_1000.simG3, True_Est.EBRT.G3), na.rm=T)
+
+coverage_rate.RP.New_1000.G0 <- rowMeans(coverage_funtion(Lower.RP.New_1000.simG0, Upper.RP.New_1000.simG0, True_Est.RP.G0), na.rm=T)
+coverage_rate.RP.New_1000.G1 <- rowMeans(coverage_funtion(Lower.RP.New_1000.simG1, Upper.RP.New_1000.simG1, True_Est.RP.G1), na.rm=T)
+coverage_rate.RP.New_1000.G2 <- rowMeans(coverage_funtion(Lower.RP.New_1000.simG2, Upper.RP.New_1000.simG2, True_Est.RP.G2), na.rm=T)
+coverage_rate.RP.New_1000.G3 <- rowMeans(coverage_funtion(Lower.RP.New_1000.simG3, Upper.RP.New_1000.simG3, True_Est.RP.G3), na.rm=T)
+
+## Bootstrap coverage
+Boot.coverage_rate.EBRT.New_1000.G0 <- rowMeans(coverage_funtion(Boot.Lower.EBRT.New_1000.simG0, Boot.Upper.EBRT.New_1000.simG0, 
+                                                        True_Est.EBRT.G0), na.rm=T)
+Boot.coverage_rate.EBRT.New_1000.G1 <- rowMeans(coverage_funtion(Boot.Lower.EBRT.New_1000.simG1, Boot.Upper.EBRT.New_1000.simG1, 
+                                                        True_Est.EBRT.G1), na.rm=T)
+Boot.coverage_rate.EBRT.New_1000.G2 <- rowMeans(coverage_funtion(Boot.Lower.EBRT.New_1000.simG2, Boot.Upper.EBRT.New_1000.simG2, 
+                                                        True_Est.EBRT.G2), na.rm=T)
+Boot.coverage_rate.EBRT.New_1000.G3 <- rowMeans(coverage_funtion(Boot.Lower.EBRT.New_1000.simG3, Boot.Upper.EBRT.New_1000.simG3, 
+                                                        True_Est.EBRT.G3), na.rm=T)
+
+Boot.coverage_rate.RP.New_1000.G0 <- rowMeans(coverage_funtion(Boot.Lower.RP.New_1000.simG0, Boot.Upper.RP.New_1000.simG0, 
+                                                      True_Est.RP.G0), na.rm=T)
+Boot.coverage_rate.RP.New_1000.G1 <- rowMeans(coverage_funtion(Boot.Lower.RP.New_1000.simG1, Boot.Upper.RP.New_1000.simG1, 
+                                                      True_Est.RP.G1), na.rm=T)
+Boot.coverage_rate.RP.New_1000.G2 <- rowMeans(coverage_funtion(Boot.Lower.RP.New_1000.simG2, Boot.Upper.RP.New_1000.simG2, 
+                                                      True_Est.RP.G2), na.rm=T)
+Boot.coverage_rate.RP.New_1000.G3 <- rowMeans(coverage_funtion(Boot.Lower.RP.New_1000.simG3, Boot.Upper.RP.New_1000.simG3, 
+                                                      True_Est.RP.G3), na.rm=T)
+
+## Symmetric Bootstrap coverage
+Sym.Boot.coverage_rate.EBRT.New_1000.G0 <- rowMeans(coverage_funtion(Sym.Boot.Lower.EBRT.New_1000.simG0, Sym.Boot.Upper.EBRT.New_1000.simG0, 
+                                                      True_Est.EBRT.G0), na.rm=T)
+Sym.Boot.coverage_rate.EBRT.New_1000.G1 <- rowMeans(coverage_funtion(Sym.Boot.Lower.EBRT.New_1000.simG1, Sym.Boot.Upper.EBRT.New_1000.simG1, 
+                                                      True_Est.EBRT.G1), na.rm=T)
+Sym.Boot.coverage_rate.EBRT.New_1000.G2 <- rowMeans(coverage_funtion(Sym.Boot.Lower.EBRT.New_1000.simG2, Sym.Boot.Upper.EBRT.New_1000.simG2, 
+                                                      True_Est.EBRT.G2), na.rm=T)
+Sym.Boot.coverage_rate.EBRT.New_1000.G3 <- rowMeans(coverage_funtion(Sym.Boot.Lower.EBRT.New_1000.simG3, Sym.Boot.Upper.EBRT.New_1000.simG3, 
+                                                      True_Est.EBRT.G3), na.rm=T)
+
+Sym.Boot.coverage_rate.RP.New_1000.G0 <- rowMeans(coverage_funtion(Sym.Boot.Lower.RP.New_1000.simG0, Sym.Boot.Upper.RP.New_1000.simG0, 
+                                                      True_Est.RP.G0), na.rm=T)
+Sym.Boot.coverage_rate.RP.New_1000.G1 <- rowMeans(coverage_funtion(Sym.Boot.Lower.RP.New_1000.simG1, Sym.Boot.Upper.RP.New_1000.simG1, 
+                                                      True_Est.RP.G1), na.rm=T)
+Sym.Boot.coverage_rate.RP.New_1000.G2 <- rowMeans(coverage_funtion(Sym.Boot.Lower.RP.New_1000.simG2, Sym.Boot.Upper.RP.New_1000.simG2, 
+                                                      True_Est.RP.G2), na.rm=T)
+Sym.Boot.coverage_rate.RP.New_1000.G3 <- rowMeans(coverage_funtion(Sym.Boot.Lower.RP.New_1000.simG3, Sym.Boot.Upper.RP.New_1000.simG3, 
+                                                      True_Est.RP.G3), na.rm=T)
+
+## Symmetric Bootstrap logit coverage
+Sym.Boot.logit.coverage_rate.EBRT.New_1000.G0 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.EBRT.New_1000.simG0, Sym.Boot.Upper.logit.EBRT.New_1000.simG0, 
+                                                      True_Est.EBRT.G0), na.rm=T)
+Sym.Boot.logit.coverage_rate.EBRT.New_1000.G1 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.EBRT.New_1000.simG1, Sym.Boot.Upper.logit.EBRT.New_1000.simG1, 
+                                                      True_Est.EBRT.G1), na.rm=T)
+Sym.Boot.logit.coverage_rate.EBRT.New_1000.G2 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.EBRT.New_1000.simG2, Sym.Boot.Upper.logit.EBRT.New_1000.simG2, 
+                                                      True_Est.EBRT.G2), na.rm=T)
+Sym.Boot.logit.coverage_rate.EBRT.New_1000.G3 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.EBRT.New_1000.simG3, Sym.Boot.Upper.logit.EBRT.New_1000.simG3, 
+                                                      True_Est.EBRT.G3), na.rm=T)
+
+
+Sym.Boot.logit.coverage_rate.RP.New_1000.G0 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.RP.New_1000.simG0, Sym.Boot.Upper.logit.RP.New_1000.simG0, 
+                                                      True_Est.RP.G0), na.rm=T)
+Sym.Boot.logit.coverage_rate.RP.New_1000.G1 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.RP.New_1000.simG1, Sym.Boot.Upper.logit.RP.New_1000.simG1, 
+                                                      True_Est.RP.G1), na.rm=T)
+Sym.Boot.logit.coverage_rate.RP.New_1000.G2 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.RP.New_1000.simG2, Sym.Boot.Upper.logit.RP.New_1000.simG2, 
+                                                      True_Est.RP.G2), na.rm=T)
+Sym.Boot.logit.coverage_rate.RP.New_1000.G3 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.RP.New_1000.simG3, Sym.Boot.Upper.logit.RP.New_1000.simG3, 
+                                                      True_Est.RP.G3), na.rm=T)
+
+
+Tpts <- c(max(which(s<=24)), max(which(s<=60)), max(which(s<=120)))
+
+Coverage_Rate_1000 <- data.frame(Gamma=c("Gamma = 0", "", "", "Gamma = 1", "", "", "Gamma = 2", "", "",
+                                    "Gamma = 3", "", ""),
+           Years = rep(c("2-years", "5-years", "10-years"), 4),
+           RP = round(c(1-True_Est.RP.G0[Tpts], 1-True_Est.RP.G1[Tpts], 1-True_Est.RP.G2[Tpts], 
+                  1-True_Est.RP.G3[Tpts]), 2),
+           EBRT = round(c(1-True_Est.EBRT.G0[Tpts], 1-True_Est.EBRT.G1[Tpts], 1-True_Est.EBRT.G2[Tpts], 
+                  1-True_Est.EBRT.G3[Tpts]), 2),
+           RP = round(c(1-Est.RP.New_1000.G0[Tpts], 1-Est.RP.New_1000.G1[Tpts], 1-Est.RP.New_1000.G2[Tpts], 
+                  1-Est.RP.New_1000.G3[Tpts]), 2),
+           EBRT = round(c(1-Est.EBRT.New_1000.G0[Tpts], 1-Est.EBRT.New_1000.G1[Tpts], 1-Est.EBRT.New_1000.G2[Tpts], 
+                  1-Est.EBRT.New_1000.G3[Tpts]), 2),
+           RP = round(c(SD_Est.RP.New_1000.G0[Tpts], SD_Est.RP.New_1000.G1[Tpts], SD_Est.RP.New_1000.G2[Tpts], 
+                  SD_Est.RP.New_1000.G3[Tpts]), 2),
+           EBRT = round(c(SD_Est.EBRT.New_1000.G0[Tpts], SD_Est.EBRT.New_1000.G1[Tpts], SD_Est.EBRT.New_1000.G2[Tpts], 
+                  SD_Est.EBRT.New_1000.G3[Tpts]), 2),
+           RP = round(c(SDR.RP.New_1000.G0[Tpts], SDR.RP.New_1000.G1[Tpts], SDR.RP.New_1000.G2[Tpts], 
+                 SDR.RP.New_1000.G3[Tpts]), 2),
+           EBRT = round(c(SDR.EBRT.New_1000.G0[Tpts], SDR.EBRT.New_1000.G1[Tpts], SDR.EBRT.New_1000.G2[Tpts], 
+                 SDR.EBRT.New_1000.G3[Tpts]), 2),
+           RP = round(c(coverage_rate.RP.New_1000.G0[Tpts], coverage_rate.RP.New_1000.G1[Tpts], 
+                              coverage_rate.RP.New_1000.G2[Tpts],coverage_rate.RP.New_1000.G3[Tpts]),2),
+           EBRT = round(c(coverage_rate.EBRT.New_1000.G0[Tpts], coverage_rate.EBRT.New_1000.G1[Tpts], 
+                          coverage_rate.EBRT.New_1000.G2[Tpts],coverage_rate.EBRT.New_1000.G3[Tpts]),2),
+           RP = round(c(Boot.coverage_rate.RP.New_1000.G0[Tpts], Boot.coverage_rate.RP.New_1000.G1[Tpts],
+                        Boot.coverage_rate.RP.New_1000.G2[Tpts], Boot.coverage_rate.RP.New_1000.G3[Tpts]),2),
+           EBRT = round(c(Boot.coverage_rate.EBRT.New_1000.G0[Tpts], Boot.coverage_rate.EBRT.New_1000.G1[Tpts], 
+                          Boot.coverage_rate.EBRT.New_1000.G2[Tpts], Boot.coverage_rate.EBRT.New_1000.G3[Tpts]),2),
+           
+           RP = round(c(Sym.Boot.coverage_rate.RP.New_1000.G0[Tpts], Sym.Boot.coverage_rate.RP.New_1000.G1[Tpts],
+                        Sym.Boot.coverage_rate.RP.New_1000.G2[Tpts], Sym.Boot.coverage_rate.RP.New_1000.G3[Tpts]),2),
+           EBRT = round(c(Sym.Boot.coverage_rate.EBRT.New_1000.G0[Tpts], Sym.Boot.coverage_rate.EBRT.New_1000.G1[Tpts], 
+                          Sym.Boot.coverage_rate.EBRT.New_1000.G2[Tpts], Sym.Boot.coverage_rate.EBRT.New_1000.G3[Tpts]),2),
+           RP = round(c(Sym.Boot.logit.coverage_rate.RP.New_1000.G0[Tpts], Sym.Boot.logit.coverage_rate.RP.New_1000.G1[Tpts],
+                        Sym.Boot.logit.coverage_rate.RP.New_1000.G2[Tpts], Sym.Boot.logit.coverage_rate.RP.New_1000.G3[Tpts]),2),
+           EBRT = round(c(Sym.Boot.logit.coverage_rate.EBRT.New_1000.G0[Tpts], Sym.Boot.logit.coverage_rate.EBRT.New_1000.G1[Tpts], 
+                          Sym.Boot.logit.coverage_rate.EBRT.New_1000.G2[Tpts], Sym.Boot.logit.coverage_rate.EBRT.New_1000.G3[Tpts]),2))
+
+ rtffile<-RTF("coverage_1000_NEW.doc")
+addHeader(rtffile,title="95% Coverage rate")
+addTable(rtffile, Coverage_Rate_1000,row.names = F, font.size=9, col.justify='R', header.col.justify='R')
+ done(rtffile)
+
+```
+
+```{r}
+
+##AVERAGE ESTIMATE
+Est.EBRT.New_3000.G0 <- rowMeans(pava.EBRT.New_3000.simG0)
+Est.EBRT.New_3000.G1 <- rowMeans(pava.EBRT.New_3000.simG1)
+Est.EBRT.New_3000.G2 <- rowMeans(pava.EBRT.New_3000.simG2)
+Est.EBRT.New_3000.G3 <- rowMeans(pava.EBRT.New_3000.simG3)
+
+Est.RP.New_3000.G0 <- rowMeans(pava.RP.New_3000.simG0)
+Est.RP.New_3000.G1 <- rowMeans(pava.RP.New_3000.simG1)
+Est.RP.New_3000.G2 <- rowMeans(pava.RP.New_3000.simG2)
+Est.RP.New_3000.G3 <- rowMeans(pava.RP.New_3000.simG3)
+
+##STANDARD DEVIATION OF ESTIMATE
+SD_Est.EBRT.New_3000.G0 <- apply(pava.EBRT.New_3000.simG0, 1, sd)
+SD_Est.EBRT.New_3000.G1 <- apply(pava.EBRT.New_3000.simG1, 1, sd)
+SD_Est.EBRT.New_3000.G2 <- apply(pava.EBRT.New_3000.simG2, 1, sd)
+SD_Est.EBRT.New_3000.G3 <- apply(pava.EBRT.New_3000.simG3, 1, sd)
+
+SD_Est.RP.New_3000.G0 <- apply(pava.RP.New_3000.simG0, 1, sd)
+SD_Est.RP.New_3000.G1 <- apply(pava.RP.New_3000.simG1, 1, sd)
+SD_Est.RP.New_3000.G2 <- apply(pava.RP.New_3000.simG2, 1, sd)
+SD_Est.RP.New_3000.G3 <- apply(pava.RP.New_3000.simG3, 1, sd)
+
+
+##AVERAGE STANDARD ERRORS
+SDR.EBRT.New_3000.G0 <- apply(Std_error.EBRT.New_3000.simG0, 1, mean)
+SDR.EBRT.New_3000.G1 <- apply(Std_error.EBRT.New_3000.simG1, 1, mean)
+SDR.EBRT.New_3000.G2 <- apply(Std_error.EBRT.New_3000.simG2, 1, mean)
+SDR.EBRT.New_3000.G3 <- apply(Std_error.EBRT.New_3000.simG3, 1, mean)
+
+SDR.RP.New_3000.G0 <- apply(Std_error.RP.New_3000.simG0, 1, mean)
+SDR.RP.New_3000.G1 <- apply(Std_error.RP.New_3000.simG1, 1, mean)
+SDR.RP.New_3000.G2 <- apply(Std_error.RP.New_3000.simG2, 1, mean)
+SDR.RP.New_3000.G3 <- apply(Std_error.RP.New_3000.simG3, 1, mean)
+
+
+
+##COVERAGE
+coverage_funtion <- function(Lower, Upper, Truth){
+  Sim_size <- ncol(Lower)
+ sapply(1:Sim_size, function(i){((1-Upper[,i]) < (1-Truth)) & ((1-Lower[,i]) > (1-Truth))})
+}
+
+coverage_rate.EBRT.New_3000.G0 <- rowMeans(coverage_funtion(Lower.EBRT.New_3000.simG0, Upper.EBRT.New_3000.simG0, True_Est.EBRT.G0), na.rm=T)
+coverage_rate.EBRT.New_3000.G1 <- rowMeans(coverage_funtion(Lower.EBRT.New_3000.simG1, Upper.EBRT.New_3000.simG1, True_Est.EBRT.G1), na.rm=T)
+coverage_rate.EBRT.New_3000.G2 <- rowMeans(coverage_funtion(Lower.EBRT.New_3000.simG2, Upper.EBRT.New_3000.simG2, True_Est.EBRT.G2), na.rm=T)
+coverage_rate.EBRT.New_3000.G3 <- rowMeans(coverage_funtion(Lower.EBRT.New_3000.simG3, Upper.EBRT.New_3000.simG3, True_Est.EBRT.G3), na.rm=T)
+
+coverage_rate.RP.New_3000.G0 <- rowMeans(coverage_funtion(Lower.RP.New_3000.simG0, Upper.RP.New_3000.simG0, True_Est.RP.G0), na.rm=T)
+coverage_rate.RP.New_3000.G1 <- rowMeans(coverage_funtion(Lower.RP.New_3000.simG1, Upper.RP.New_3000.simG1, True_Est.RP.G1), na.rm=T)
+coverage_rate.RP.New_3000.G2 <- rowMeans(coverage_funtion(Lower.RP.New_3000.simG2, Upper.RP.New_3000.simG2, True_Est.RP.G2), na.rm=T)
+coverage_rate.RP.New_3000.G3 <- rowMeans(coverage_funtion(Lower.RP.New_3000.simG3, Upper.RP.New_3000.simG3, True_Est.RP.G3), na.rm=T)
+
+## Bootstrap coverage
+Boot.coverage_rate.EBRT.New_3000.G0 <- rowMeans(coverage_funtion(Boot.Lower.EBRT.New_3000.simG0, Boot.Upper.EBRT.New_3000.simG0, 
+                                                        True_Est.EBRT.G0), na.rm=T)
+Boot.coverage_rate.EBRT.New_3000.G1 <- rowMeans(coverage_funtion(Boot.Lower.EBRT.New_3000.simG1, Boot.Upper.EBRT.New_3000.simG1, 
+                                                        True_Est.EBRT.G1), na.rm=T)
+Boot.coverage_rate.EBRT.New_3000.G2 <- rowMeans(coverage_funtion(Boot.Lower.EBRT.New_3000.simG2, Boot.Upper.EBRT.New_3000.simG2, 
+                                                        True_Est.EBRT.G2), na.rm=T)
+Boot.coverage_rate.EBRT.New_3000.G3 <- rowMeans(coverage_funtion(Boot.Lower.EBRT.New_3000.simG3, Boot.Upper.EBRT.New_3000.simG3, 
+                                                        True_Est.EBRT.G3), na.rm=T)
+
+Boot.coverage_rate.RP.New_3000.G0 <- rowMeans(coverage_funtion(Boot.Lower.RP.New_3000.simG0, Boot.Upper.RP.New_3000.simG0, 
+                                                      True_Est.RP.G0), na.rm=T)
+Boot.coverage_rate.RP.New_3000.G1 <- rowMeans(coverage_funtion(Boot.Lower.RP.New_3000.simG1, Boot.Upper.RP.New_3000.simG1, 
+                                                      True_Est.RP.G1), na.rm=T)
+Boot.coverage_rate.RP.New_3000.G2 <- rowMeans(coverage_funtion(Boot.Lower.RP.New_3000.simG2, Boot.Upper.RP.New_3000.simG2, 
+                                                      True_Est.RP.G2), na.rm=T)
+Boot.coverage_rate.RP.New_3000.G3 <- rowMeans(coverage_funtion(Boot.Lower.RP.New_3000.simG3, Boot.Upper.RP.New_3000.simG3, 
+                                                      True_Est.RP.G3), na.rm=T)
+
+## Symmetric Bootstrap coverage
+Sym.Boot.coverage_rate.EBRT.New_3000.G0 <- rowMeans(coverage_funtion(Sym.Boot.Lower.EBRT.New_3000.simG0, Sym.Boot.Upper.EBRT.New_3000.simG0, 
+                                                      True_Est.EBRT.G0), na.rm=T)
+Sym.Boot.coverage_rate.EBRT.New_3000.G1 <- rowMeans(coverage_funtion(Sym.Boot.Lower.EBRT.New_3000.simG1, Sym.Boot.Upper.EBRT.New_3000.simG1, 
+                                                      True_Est.EBRT.G1), na.rm=T)
+Sym.Boot.coverage_rate.EBRT.New_3000.G2 <- rowMeans(coverage_funtion(Sym.Boot.Lower.EBRT.New_3000.simG2, Sym.Boot.Upper.EBRT.New_3000.simG2, 
+                                                      True_Est.EBRT.G2), na.rm=T)
+Sym.Boot.coverage_rate.EBRT.New_3000.G3 <- rowMeans(coverage_funtion(Sym.Boot.Lower.EBRT.New_3000.simG3, Sym.Boot.Upper.EBRT.New_3000.simG3, 
+                                                      True_Est.EBRT.G3), na.rm=T)
+
+Sym.Boot.coverage_rate.RP.New_3000.G0 <- rowMeans(coverage_funtion(Sym.Boot.Lower.RP.New_3000.simG0, Sym.Boot.Upper.RP.New_3000.simG0, 
+                                                      True_Est.RP.G0), na.rm=T)
+Sym.Boot.coverage_rate.RP.New_3000.G1 <- rowMeans(coverage_funtion(Sym.Boot.Lower.RP.New_3000.simG1, Sym.Boot.Upper.RP.New_3000.simG1, 
+                                                      True_Est.RP.G1), na.rm=T)
+Sym.Boot.coverage_rate.RP.New_3000.G2 <- rowMeans(coverage_funtion(Sym.Boot.Lower.RP.New_3000.simG2, Sym.Boot.Upper.RP.New_3000.simG2, 
+                                                      True_Est.RP.G2), na.rm=T)
+Sym.Boot.coverage_rate.RP.New_3000.G3 <- rowMeans(coverage_funtion(Sym.Boot.Lower.RP.New_3000.simG3, Sym.Boot.Upper.RP.New_3000.simG3, 
+                                                      True_Est.RP.G3), na.rm=T)
+
+## Symmetric Bootstrap logit coverage
+Sym.Boot.logit.coverage_rate.EBRT.New_3000.G0 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.EBRT.New_3000.simG0, Sym.Boot.Upper.logit.EBRT.New_3000.simG0, 
+                                                      True_Est.EBRT.G0), na.rm=T)
+Sym.Boot.logit.coverage_rate.EBRT.New_3000.G1 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.EBRT.New_3000.simG1, Sym.Boot.Upper.logit.EBRT.New_3000.simG1, 
+                                                      True_Est.EBRT.G1), na.rm=T)
+Sym.Boot.logit.coverage_rate.EBRT.New_3000.G2 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.EBRT.New_3000.simG2, Sym.Boot.Upper.logit.EBRT.New_3000.simG2, 
+                                                      True_Est.EBRT.G2), na.rm=T)
+Sym.Boot.logit.coverage_rate.EBRT.New_3000.G3 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.EBRT.New_3000.simG3, Sym.Boot.Upper.logit.EBRT.New_3000.simG3, 
+                                                      True_Est.EBRT.G3), na.rm=T)
+
+
+Sym.Boot.logit.coverage_rate.RP.New_3000.G0 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.RP.New_3000.simG0, Sym.Boot.Upper.logit.RP.New_3000.simG0, 
+                                                      True_Est.RP.G0), na.rm=T)
+Sym.Boot.logit.coverage_rate.RP.New_3000.G1 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.RP.New_3000.simG1, Sym.Boot.Upper.logit.RP.New_3000.simG1, 
+                                                      True_Est.RP.G1), na.rm=T)
+Sym.Boot.logit.coverage_rate.RP.New_3000.G2 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.RP.New_3000.simG2, Sym.Boot.Upper.logit.RP.New_3000.simG2, 
+                                                      True_Est.RP.G2), na.rm=T)
+Sym.Boot.logit.coverage_rate.RP.New_3000.G3 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.RP.New_3000.simG3, Sym.Boot.Upper.logit.RP.New_3000.simG3, 
+                                                      True_Est.RP.G3), na.rm=T)
+
+
+Tpts <- c(max(which(s<=24)), max(which(s<=60)), max(which(s<=120)))
+
+Coverage_Rate_3000 <- data.frame(Gamma=c("Gamma = 0", "", "", "Gamma = 1", "", "", "Gamma = 2", "", "",
+                                    "Gamma = 3", "", ""),
+           Years = rep(c("2-years", "5-years", "10-years"), 4),
+           RP = round(c(1-True_Est.RP.G0[Tpts], 1-True_Est.RP.G1[Tpts], 1-True_Est.RP.G2[Tpts], 
+                  1-True_Est.RP.G3[Tpts]), 2),
+           EBRT = round(c(1-True_Est.EBRT.G0[Tpts], 1-True_Est.EBRT.G1[Tpts], 1-True_Est.EBRT.G2[Tpts], 
+                  1-True_Est.EBRT.G3[Tpts]), 2),
+           RP = round(c(1-Est.RP.New_3000.G0[Tpts], 1-Est.RP.New_3000.G1[Tpts], 1-Est.RP.New_3000.G2[Tpts], 
+                  1-Est.RP.New_3000.G3[Tpts]), 2),
+           EBRT = round(c(1-Est.EBRT.New_3000.G0[Tpts], 1-Est.EBRT.New_3000.G1[Tpts], 1-Est.EBRT.New_3000.G2[Tpts], 
+                  1-Est.EBRT.New_3000.G3[Tpts]), 2),
+           RP = round(c(SD_Est.RP.New_3000.G0[Tpts], SD_Est.RP.New_3000.G1[Tpts], SD_Est.RP.New_3000.G2[Tpts], 
+                  SD_Est.RP.New_3000.G3[Tpts]), 2),
+           EBRT = round(c(SD_Est.EBRT.New_3000.G0[Tpts], SD_Est.EBRT.New_3000.G1[Tpts], SD_Est.EBRT.New_3000.G2[Tpts], 
+                  SD_Est.EBRT.New_3000.G3[Tpts]), 2),
+           RP = round(c(SDR.RP.New_3000.G0[Tpts], SDR.RP.New_3000.G1[Tpts], SDR.RP.New_3000.G2[Tpts], 
+                 SDR.RP.New_3000.G3[Tpts]), 2),
+           EBRT = round(c(SDR.EBRT.New_3000.G0[Tpts], SDR.EBRT.New_3000.G1[Tpts], SDR.EBRT.New_3000.G2[Tpts], 
+                 SDR.EBRT.New_3000.G3[Tpts]), 2),
+           RP = round(c(coverage_rate.RP.New_3000.G0[Tpts], coverage_rate.RP.New_3000.G1[Tpts], 
+                              coverage_rate.RP.New_3000.G2[Tpts],coverage_rate.RP.New_3000.G3[Tpts]),2),
+           EBRT = round(c(coverage_rate.EBRT.New_3000.G0[Tpts], coverage_rate.EBRT.New_3000.G1[Tpts], 
+                          coverage_rate.EBRT.New_3000.G2[Tpts],coverage_rate.EBRT.New_3000.G3[Tpts]),2),
+           RP = round(c(Boot.coverage_rate.RP.New_3000.G0[Tpts], Boot.coverage_rate.RP.New_3000.G1[Tpts],
+                        Boot.coverage_rate.RP.New_3000.G2[Tpts], Boot.coverage_rate.RP.New_3000.G3[Tpts]),2),
+           EBRT = round(c(Boot.coverage_rate.EBRT.New_3000.G0[Tpts], Boot.coverage_rate.EBRT.New_3000.G1[Tpts], 
+                          Boot.coverage_rate.EBRT.New_3000.G2[Tpts], Boot.coverage_rate.EBRT.New_3000.G3[Tpts]),2),
+           
+           RP = round(c(Sym.Boot.coverage_rate.RP.New_3000.G0[Tpts], Sym.Boot.coverage_rate.RP.New_3000.G1[Tpts],
+                        Sym.Boot.coverage_rate.RP.New_3000.G2[Tpts], Sym.Boot.coverage_rate.RP.New_3000.G3[Tpts]),2),
+           EBRT = round(c(Sym.Boot.coverage_rate.EBRT.New_3000.G0[Tpts], Sym.Boot.coverage_rate.EBRT.New_3000.G1[Tpts], 
+                          Sym.Boot.coverage_rate.EBRT.New_3000.G2[Tpts], Sym.Boot.coverage_rate.EBRT.New_3000.G3[Tpts]),2),
+           RP = round(c(Sym.Boot.logit.coverage_rate.RP.New_3000.G0[Tpts], Sym.Boot.logit.coverage_rate.RP.New_3000.G1[Tpts],
+                        Sym.Boot.logit.coverage_rate.RP.New_3000.G2[Tpts], Sym.Boot.logit.coverage_rate.RP.New_3000.G3[Tpts]),2),
+           EBRT = round(c(Sym.Boot.logit.coverage_rate.EBRT.New_3000.G0[Tpts], Sym.Boot.logit.coverage_rate.EBRT.New_3000.G1[Tpts], 
+                          Sym.Boot.logit.coverage_rate.EBRT.New_3000.G2[Tpts], Sym.Boot.logit.coverage_rate.EBRT.New_3000.G3[Tpts]),2))
+
+ rtffile<-RTF("coverage_3000_NEW.doc")
+addHeader(rtffile,title="95% Coverage rate")
+addTable(rtffile, Coverage_Rate_3000,row.names = F, font.size=9, col.justify='R', header.col.justify='R')
+ done(rtffile)
+
+```
+
+```{r}
+
+##AVERAGE ESTIMATE
+Est.EBRT.New_5000.G0 <- rowMeans(pava.EBRT.New_5000.simG0)
+Est.EBRT.New_5000.G1 <- rowMeans(pava.EBRT.New_5000.simG1)
+Est.EBRT.New_5000.G2 <- rowMeans(pava.EBRT.New_5000.simG2)
+Est.EBRT.New_5000.G3 <- rowMeans(pava.EBRT.New_5000.simG3)
+
+Est.RP.New_5000.G0 <- rowMeans(pava.RP.New_5000.simG0)
+Est.RP.New_5000.G1 <- rowMeans(pava.RP.New_5000.simG1)
+Est.RP.New_5000.G2 <- rowMeans(pava.RP.New_5000.simG2)
+Est.RP.New_5000.G3 <- rowMeans(pava.RP.New_5000.simG3)
+
+##STANDARD DEVIATION OF ESTIMATE
+SD_Est.EBRT.New_5000.G0 <- apply(pava.EBRT.New_5000.simG0, 1, sd)
+SD_Est.EBRT.New_5000.G1 <- apply(pava.EBRT.New_5000.simG1, 1, sd)
+SD_Est.EBRT.New_5000.G2 <- apply(pava.EBRT.New_5000.simG2, 1, sd)
+SD_Est.EBRT.New_5000.G3 <- apply(pava.EBRT.New_5000.simG3, 1, sd)
+
+SD_Est.RP.New_5000.G0 <- apply(pava.RP.New_5000.simG0, 1, sd)
+SD_Est.RP.New_5000.G1 <- apply(pava.RP.New_5000.simG1, 1, sd)
+SD_Est.RP.New_5000.G2 <- apply(pava.RP.New_5000.simG2, 1, sd)
+SD_Est.RP.New_5000.G3 <- apply(pava.RP.New_5000.simG3, 1, sd)
+
+
+##AVERAGE STANDARD ERRORS
+SDR.EBRT.New_5000.G0 <- apply(Std_error.EBRT.New_5000.simG0, 1, mean)
+SDR.EBRT.New_5000.G1 <- apply(Std_error.EBRT.New_5000.simG1, 1, mean)
+SDR.EBRT.New_5000.G2 <- apply(Std_error.EBRT.New_5000.simG2, 1, mean)
+SDR.EBRT.New_5000.G3 <- apply(Std_error.EBRT.New_5000.simG3, 1, mean)
+
+SDR.RP.New_5000.G0 <- apply(Std_error.RP.New_5000.simG0, 1, mean)
+SDR.RP.New_5000.G1 <- apply(Std_error.RP.New_5000.simG1, 1, mean)
+SDR.RP.New_5000.G2 <- apply(Std_error.RP.New_5000.simG2, 1, mean)
+SDR.RP.New_5000.G3 <- apply(Std_error.RP.New_5000.simG3, 1, mean)
+
+
+
+##COVERAGE
+coverage_funtion <- function(Lower, Upper, Truth){
+  Sim_size <- ncol(Lower)
+ sapply(1:Sim_size, function(i){((1-Upper[,i]) < (1-Truth)) & ((1-Lower[,i]) > (1-Truth))})
+}
+
+coverage_rate.EBRT.New_5000.G0 <- rowMeans(coverage_funtion(Lower.EBRT.New_5000.simG0, Upper.EBRT.New_5000.simG0, True_Est.EBRT.G0), na.rm=T)
+coverage_rate.EBRT.New_5000.G1 <- rowMeans(coverage_funtion(Lower.EBRT.New_5000.simG1, Upper.EBRT.New_5000.simG1, True_Est.EBRT.G1), na.rm=T)
+coverage_rate.EBRT.New_5000.G2 <- rowMeans(coverage_funtion(Lower.EBRT.New_5000.simG2, Upper.EBRT.New_5000.simG2, True_Est.EBRT.G2), na.rm=T)
+coverage_rate.EBRT.New_5000.G3 <- rowMeans(coverage_funtion(Lower.EBRT.New_5000.simG3, Upper.EBRT.New_5000.simG3, True_Est.EBRT.G3), na.rm=T)
+
+coverage_rate.RP.New_5000.G0 <- rowMeans(coverage_funtion(Lower.RP.New_5000.simG0, Upper.RP.New_5000.simG0, True_Est.RP.G0), na.rm=T)
+coverage_rate.RP.New_5000.G1 <- rowMeans(coverage_funtion(Lower.RP.New_5000.simG1, Upper.RP.New_5000.simG1, True_Est.RP.G1), na.rm=T)
+coverage_rate.RP.New_5000.G2 <- rowMeans(coverage_funtion(Lower.RP.New_5000.simG2, Upper.RP.New_5000.simG2, True_Est.RP.G2), na.rm=T)
+coverage_rate.RP.New_5000.G3 <- rowMeans(coverage_funtion(Lower.RP.New_5000.simG3, Upper.RP.New_5000.simG3, True_Est.RP.G3), na.rm=T)
+
+## Bootstrap coverage
+Boot.coverage_rate.EBRT.New_5000.G0 <- rowMeans(coverage_funtion(Boot.Lower.EBRT.New_5000.simG0, Boot.Upper.EBRT.New_5000.simG0, 
+                                                        True_Est.EBRT.G0), na.rm=T)
+Boot.coverage_rate.EBRT.New_5000.G1 <- rowMeans(coverage_funtion(Boot.Lower.EBRT.New_5000.simG1, Boot.Upper.EBRT.New_5000.simG1, 
+                                                        True_Est.EBRT.G1), na.rm=T)
+Boot.coverage_rate.EBRT.New_5000.G2 <- rowMeans(coverage_funtion(Boot.Lower.EBRT.New_5000.simG2, Boot.Upper.EBRT.New_5000.simG2, 
+                                                        True_Est.EBRT.G2), na.rm=T)
+Boot.coverage_rate.EBRT.New_5000.G3 <- rowMeans(coverage_funtion(Boot.Lower.EBRT.New_5000.simG3, Boot.Upper.EBRT.New_5000.simG3, 
+                                                        True_Est.EBRT.G3), na.rm=T)
+
+Boot.coverage_rate.RP.New_5000.G0 <- rowMeans(coverage_funtion(Boot.Lower.RP.New_5000.simG0, Boot.Upper.RP.New_5000.simG0, 
+                                                      True_Est.RP.G0), na.rm=T)
+Boot.coverage_rate.RP.New_5000.G1 <- rowMeans(coverage_funtion(Boot.Lower.RP.New_5000.simG1, Boot.Upper.RP.New_5000.simG1, 
+                                                      True_Est.RP.G1), na.rm=T)
+Boot.coverage_rate.RP.New_5000.G2 <- rowMeans(coverage_funtion(Boot.Lower.RP.New_5000.simG2, Boot.Upper.RP.New_5000.simG2, 
+                                                      True_Est.RP.G2), na.rm=T)
+Boot.coverage_rate.RP.New_5000.G3 <- rowMeans(coverage_funtion(Boot.Lower.RP.New_5000.simG3, Boot.Upper.RP.New_5000.simG3, 
+                                                      True_Est.RP.G3), na.rm=T)
+
+## Symmetric Bootstrap coverage
+Sym.Boot.coverage_rate.EBRT.New_5000.G0 <- rowMeans(coverage_funtion(Sym.Boot.Lower.EBRT.New_5000.simG0, Sym.Boot.Upper.EBRT.New_5000.simG0, 
+                                                      True_Est.EBRT.G0), na.rm=T)
+Sym.Boot.coverage_rate.EBRT.New_5000.G1 <- rowMeans(coverage_funtion(Sym.Boot.Lower.EBRT.New_5000.simG1, Sym.Boot.Upper.EBRT.New_5000.simG1, 
+                                                      True_Est.EBRT.G1), na.rm=T)
+Sym.Boot.coverage_rate.EBRT.New_5000.G2 <- rowMeans(coverage_funtion(Sym.Boot.Lower.EBRT.New_5000.simG2, Sym.Boot.Upper.EBRT.New_5000.simG2, 
+                                                      True_Est.EBRT.G2), na.rm=T)
+Sym.Boot.coverage_rate.EBRT.New_5000.G3 <- rowMeans(coverage_funtion(Sym.Boot.Lower.EBRT.New_5000.simG3, Sym.Boot.Upper.EBRT.New_5000.simG3, 
+                                                      True_Est.EBRT.G3), na.rm=T)
+
+Sym.Boot.coverage_rate.RP.New_5000.G0 <- rowMeans(coverage_funtion(Sym.Boot.Lower.RP.New_5000.simG0, Sym.Boot.Upper.RP.New_5000.simG0, 
+                                                      True_Est.RP.G0), na.rm=T)
+Sym.Boot.coverage_rate.RP.New_5000.G1 <- rowMeans(coverage_funtion(Sym.Boot.Lower.RP.New_5000.simG1, Sym.Boot.Upper.RP.New_5000.simG1, 
+                                                      True_Est.RP.G1), na.rm=T)
+Sym.Boot.coverage_rate.RP.New_5000.G2 <- rowMeans(coverage_funtion(Sym.Boot.Lower.RP.New_5000.simG2, Sym.Boot.Upper.RP.New_5000.simG2, 
+                                                      True_Est.RP.G2), na.rm=T)
+Sym.Boot.coverage_rate.RP.New_5000.G3 <- rowMeans(coverage_funtion(Sym.Boot.Lower.RP.New_5000.simG3, Sym.Boot.Upper.RP.New_5000.simG3, 
+                                                      True_Est.RP.G3), na.rm=T)
+
+## Symmetric Bootstrap logit coverage
+Sym.Boot.logit.coverage_rate.EBRT.New_5000.G0 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.EBRT.New_5000.simG0, Sym.Boot.Upper.logit.EBRT.New_5000.simG0, 
+                                                      True_Est.EBRT.G0), na.rm=T)
+Sym.Boot.logit.coverage_rate.EBRT.New_5000.G1 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.EBRT.New_5000.simG1, Sym.Boot.Upper.logit.EBRT.New_5000.simG1, 
+                                                      True_Est.EBRT.G1), na.rm=T)
+Sym.Boot.logit.coverage_rate.EBRT.New_5000.G2 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.EBRT.New_5000.simG2, Sym.Boot.Upper.logit.EBRT.New_5000.simG2, 
+                                                      True_Est.EBRT.G2), na.rm=T)
+Sym.Boot.logit.coverage_rate.EBRT.New_5000.G3 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.EBRT.New_5000.simG3, Sym.Boot.Upper.logit.EBRT.New_5000.simG3, 
+                                                      True_Est.EBRT.G3), na.rm=T)
+
+
+Sym.Boot.logit.coverage_rate.RP.New_5000.G0 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.RP.New_5000.simG0, Sym.Boot.Upper.logit.RP.New_5000.simG0, 
+                                                      True_Est.RP.G0), na.rm=T)
+Sym.Boot.logit.coverage_rate.RP.New_5000.G1 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.RP.New_5000.simG1, Sym.Boot.Upper.logit.RP.New_5000.simG1, 
+                                                      True_Est.RP.G1), na.rm=T)
+Sym.Boot.logit.coverage_rate.RP.New_5000.G2 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.RP.New_5000.simG2, Sym.Boot.Upper.logit.RP.New_5000.simG2, 
+                                                      True_Est.RP.G2), na.rm=T)
+Sym.Boot.logit.coverage_rate.RP.New_5000.G3 <- rowMeans(coverage_funtion(Sym.Boot.Lower.logit.RP.New_5000.simG3, Sym.Boot.Upper.logit.RP.New_5000.simG3, 
+                                                      True_Est.RP.G3), na.rm=T)
+
+
+Tpts <- c(max(which(s<=24)), max(which(s<=60)), max(which(s<=120)))
+
+Coverage_Rate_5000 <- data.frame(Gamma=c("Gamma = 0", "", "", "Gamma = 1", "", "", "Gamma = 2", "", "",
+                                    "Gamma = 3", "", ""),
+           Years = rep(c("2-years", "5-years", "10-years"), 4),
+           RP = round(c(1-True_Est.RP.G0[Tpts], 1-True_Est.RP.G1[Tpts], 1-True_Est.RP.G2[Tpts], 
+                  1-True_Est.RP.G3[Tpts]), 2),
+           EBRT = round(c(1-True_Est.EBRT.G0[Tpts], 1-True_Est.EBRT.G1[Tpts], 1-True_Est.EBRT.G2[Tpts], 
+                  1-True_Est.EBRT.G3[Tpts]), 2),
+           RP = round(c(1-Est.RP.New_5000.G0[Tpts], 1-Est.RP.New_5000.G1[Tpts], 1-Est.RP.New_5000.G2[Tpts], 
+                  1-Est.RP.New_5000.G3[Tpts]), 2),
+           EBRT = round(c(1-Est.EBRT.New_5000.G0[Tpts], 1-Est.EBRT.New_5000.G1[Tpts], 1-Est.EBRT.New_5000.G2[Tpts], 
+                  1-Est.EBRT.New_5000.G3[Tpts]), 2),
+           RP = round(c(SD_Est.RP.New_5000.G0[Tpts], SD_Est.RP.New_5000.G1[Tpts], SD_Est.RP.New_5000.G2[Tpts], 
+                  SD_Est.RP.New_5000.G3[Tpts]), 2),
+           EBRT = round(c(SD_Est.EBRT.New_5000.G0[Tpts], SD_Est.EBRT.New_5000.G1[Tpts], SD_Est.EBRT.New_5000.G2[Tpts], 
+                  SD_Est.EBRT.New_5000.G3[Tpts]), 2),
+           RP = round(c(SDR.RP.New_5000.G0[Tpts], SDR.RP.New_5000.G1[Tpts], SDR.RP.New_5000.G2[Tpts], 
+                 SDR.RP.New_5000.G3[Tpts]), 2),
+           EBRT = round(c(SDR.EBRT.New_5000.G0[Tpts], SDR.EBRT.New_5000.G1[Tpts], SDR.EBRT.New_5000.G2[Tpts], 
+                 SDR.EBRT.New_5000.G3[Tpts]), 2),
+           RP = round(c(coverage_rate.RP.New_5000.G0[Tpts], coverage_rate.RP.New_5000.G1[Tpts], 
+                              coverage_rate.RP.New_5000.G2[Tpts],coverage_rate.RP.New_5000.G3[Tpts]),2),
+           EBRT = round(c(coverage_rate.EBRT.New_5000.G0[Tpts], coverage_rate.EBRT.New_5000.G1[Tpts], 
+                          coverage_rate.EBRT.New_5000.G2[Tpts],coverage_rate.EBRT.New_5000.G3[Tpts]),2),
+           RP = round(c(Boot.coverage_rate.RP.New_5000.G0[Tpts], Boot.coverage_rate.RP.New_5000.G1[Tpts],
+                        Boot.coverage_rate.RP.New_5000.G2[Tpts], Boot.coverage_rate.RP.New_5000.G3[Tpts]),2),
+           EBRT = round(c(Boot.coverage_rate.EBRT.New_5000.G0[Tpts], Boot.coverage_rate.EBRT.New_5000.G1[Tpts], 
+                          Boot.coverage_rate.EBRT.New_5000.G2[Tpts], Boot.coverage_rate.EBRT.New_5000.G3[Tpts]),2),
+           
+           RP = round(c(Sym.Boot.coverage_rate.RP.New_5000.G0[Tpts], Sym.Boot.coverage_rate.RP.New_5000.G1[Tpts],
+                        Sym.Boot.coverage_rate.RP.New_5000.G2[Tpts], Sym.Boot.coverage_rate.RP.New_5000.G3[Tpts]),2),
+           EBRT = round(c(Sym.Boot.coverage_rate.EBRT.New_5000.G0[Tpts], Sym.Boot.coverage_rate.EBRT.New_5000.G1[Tpts], 
+                          Sym.Boot.coverage_rate.EBRT.New_5000.G2[Tpts], Sym.Boot.coverage_rate.EBRT.New_5000.G3[Tpts]),2),
+           RP = round(c(Sym.Boot.logit.coverage_rate.RP.New_5000.G0[Tpts], Sym.Boot.logit.coverage_rate.RP.New_5000.G1[Tpts],
+                        Sym.Boot.logit.coverage_rate.RP.New_5000.G2[Tpts], Sym.Boot.logit.coverage_rate.RP.New_5000.G3[Tpts]),2),
+           EBRT = round(c(Sym.Boot.logit.coverage_rate.EBRT.New_5000.G0[Tpts], Sym.Boot.logit.coverage_rate.EBRT.New_5000.G1[Tpts], 
+                          Sym.Boot.logit.coverage_rate.EBRT.New_5000.G2[Tpts], Sym.Boot.logit.coverage_rate.EBRT.New_5000.G3[Tpts]),2))
+
+ rtffile<-RTF("coverage_5000_NEW.doc")
+addHeader(rtffile,title="95% Coverage rate")
+addTable(rtffile, Coverage_Rate_5000,row.names = F, font.size=9, col.justify='R', header.col.justify='R')
+ done(rtffile)
+
+```
+
+
+PERFORMANCE
+```{r}
+RMSE <- function(Est, Truth,Tpts){
+  sqrt(rowMeans(apply(Est[Tpts,], 2, \(x) (x-Truth[Tpts])^2)))
+}
+
+Performance <- data.table(
+  Gamma=c("Gamma = 0", "", "", "Gamma = 1", "", "", "Gamma = 2", "", "",
+                                    "Gamma = 3", "", ""),
+           Years = rep(c("2-years", "5-years", "10-years"), 4),
+  Bias_RP_1000 = round(c(1-Est.RP.New_1000.G0[Tpts], 1-Est.RP.New_1000.G1[Tpts], 1-Est.RP.New_1000.G2[Tpts], 
+                  1-Est.RP.New_1000.G3[Tpts]), 2) - 
+    round(c(1-True_Est.RP.G0[Tpts], 1-True_Est.RP.G1[Tpts], 1-True_Est.RP.G2[Tpts], 
+                  1-True_Est.RP.G3[Tpts]), 2),
+  
+  Bias_EBRT_1000 = round(c(1-Est.EBRT.New_1000.G0[Tpts], 1-Est.EBRT.New_1000.G1[Tpts], 1-Est.EBRT.New_1000.G2[Tpts], 
+                  1-Est.EBRT.New_1000.G3[Tpts]), 2) - 
+    round(c(1-True_Est.EBRT.G0[Tpts], 1-True_Est.EBRT.G1[Tpts], 1-True_Est.EBRT.G2[Tpts], 
+                  1-True_Est.EBRT.G3[Tpts]), 2),
+  
+  # RMSE_RP = round(c(RMSE(pava.RP.simNew_1000.G0, True_Est.RP.G0,Tpts),
+  #                    RMSE(pava.RP.simNew_1000.G1, True_Est.RP.G1,Tpts),
+  #                    RMSE(pava.RP.simNew_1000.G2, True_Est.RP.G2,Tpts),
+  #                    RMSE(pava.RP.simNew_1000.G3, True_Est.RP.G3,Tpts)), 2),
+  # 
+  # RMSE_EBRT = round(c(RMSE(pava.EBRT.simNew_1000.G0, True_Est.EBRT.G0,Tpts),
+  #                    RMSE(pava.EBRT.simNew_1000.G1, True_Est.EBRT.G1,Tpts),
+  #                    RMSE(pava.EBRT.simNew_1000.G2, True_Est.EBRT.G2,Tpts),
+  #                    RMSE(pava.EBRT.simNew_1000.G3, True_Est.EBRT.G3,Tpts)), 2),
+  
+  
+  RP_Coverage_1000 = round(c(coverage_rate.RP.New_1000.G0[Tpts], coverage_rate.RP.New_1000.G1[Tpts], 
+                              coverage_rate.RP.New_1000.G2[Tpts],coverage_rate.RP.New_1000.G3[Tpts]),2)*100,
+                      
+  EBRT_Coverage_1000 = round(c(coverage_rate.EBRT.New_1000.G0[Tpts], coverage_rate.EBRT.New_1000.G1[Tpts], 
+                          coverage_rate.EBRT.New_1000.G2[Tpts],coverage_rate.EBRT.New_1000.G3[Tpts]),2)*100,
+  
+  
+  RP_Bootstap_t_1000 = round(c(Sym.Boot.logit.coverage_rate.RP.New_1000.G0[Tpts],
+                          Sym.Boot.logit.coverage_rate.RP.New_1000.G1[Tpts],
+                          Sym.Boot.logit.coverage_rate.RP.New_1000.G2[Tpts],
+                          Sym.Boot.logit.coverage_rate.RP.New_1000.G3[Tpts]),2)*100,
+  
+  EBRT_Bootstap_t_1000 = round(c(Sym.Boot.logit.coverage_rate.EBRT.New_1000.G0[Tpts],
+                            Sym.Boot.logit.coverage_rate.EBRT.New_1000.G1[Tpts], 
+                            Sym.Boot.logit.coverage_rate.EBRT.New_1000.G2[Tpts],
+                            Sym.Boot.logit.coverage_rate.EBRT.New_1000.G3[Tpts]),2)*100,
+  
+  Bias_RP_3000 = round(c(1-Est.RP.New_3000.G0[Tpts], 1-Est.RP.New_3000.G1[Tpts], 1-Est.RP.New_3000.G2[Tpts], 
+                  1-Est.RP.New_3000.G3[Tpts]), 2) - 
+    round(c(1-True_Est.RP.G0[Tpts], 1-True_Est.RP.G1[Tpts], 1-True_Est.RP.G2[Tpts], 
+                  1-True_Est.RP.G3[Tpts]), 2),
+  
+  Bias_EBRT_3000 = round(c(1-Est.EBRT.New_3000.G0[Tpts], 1-Est.EBRT.New_3000.G1[Tpts], 1-Est.EBRT.New_3000.G2[Tpts], 
+                  1-Est.EBRT.New_3000.G3[Tpts]), 2) - 
+    round(c(1-True_Est.EBRT.G0[Tpts], 1-True_Est.EBRT.G1[Tpts], 1-True_Est.EBRT.G2[Tpts], 
+                  1-True_Est.EBRT.G3[Tpts]), 2),
+  
+  # RMSE_RP = round(c(RMSE(pava.RP.simNew_3000.G0, True_Est.RP.G0,Tpts),
+  #                    RMSE(pava.RP.simNew_3000.G1, True_Est.RP.G1,Tpts),
+  #                    RMSE(pava.RP.simNew_3000.G2, True_Est.RP.G2,Tpts),
+  #                    RMSE(pava.RP.simNew_3000.G3, True_Est.RP.G3,Tpts)), 2),
+  # 
+  # RMSE_EBRT = round(c(RMSE(pava.EBRT.simNew_3000.G0, True_Est.EBRT.G0,Tpts),
+  #                    RMSE(pava.EBRT.simNew_3000.G1, True_Est.EBRT.G1,Tpts),
+  #                    RMSE(pava.EBRT.simNew_3000.G2, True_Est.EBRT.G2,Tpts),
+  #                    RMSE(pava.EBRT.simNew_3000.G3, True_Est.EBRT.G3,Tpts)), 2),
+  
+  
+  RP_Coverage_3000 = round(c(coverage_rate.RP.New_3000.G0[Tpts], coverage_rate.RP.New_3000.G1[Tpts], 
+                              coverage_rate.RP.New_3000.G2[Tpts],coverage_rate.RP.New_3000.G3[Tpts]),2)*100,
+                      
+  EBRT_Coverage_3000 = round(c(coverage_rate.EBRT.New_3000.G0[Tpts], coverage_rate.EBRT.New_3000.G1[Tpts], 
+                          coverage_rate.EBRT.New_3000.G2[Tpts],coverage_rate.EBRT.New_3000.G3[Tpts]),2)*100,
+  
+  
+  RP_Bootstap_t_3000 = round(c(Sym.Boot.logit.coverage_rate.RP.New_3000.G0[Tpts],
+                          Sym.Boot.logit.coverage_rate.RP.New_3000.G1[Tpts],
+                          Sym.Boot.logit.coverage_rate.RP.New_3000.G2[Tpts],
+                          Sym.Boot.logit.coverage_rate.RP.New_3000.G3[Tpts]),2)*100,
+  
+  EBRT_Bootstap_t_3000 = round(c(Sym.Boot.logit.coverage_rate.EBRT.New_3000.G0[Tpts],
+                            Sym.Boot.logit.coverage_rate.EBRT.New_3000.G1[Tpts], 
+                            Sym.Boot.logit.coverage_rate.EBRT.New_3000.G2[Tpts],
+                            Sym.Boot.logit.coverage_rate.EBRT.New_3000.G3[Tpts]),2)*100,
+  
+  Bias_RP_5000 = round(c(1-Est.RP.New_5000.G0[Tpts], 1-Est.RP.New_5000.G1[Tpts], 1-Est.RP.New_5000.G2[Tpts], 
+                  1-Est.RP.New_5000.G3[Tpts]), 2) - 
+    round(c(1-True_Est.RP.G0[Tpts], 1-True_Est.RP.G1[Tpts], 1-True_Est.RP.G2[Tpts], 
+                  1-True_Est.RP.G3[Tpts]), 2),
+  
+  Bias_EBRT_5000 = round(c(1-Est.EBRT.New_5000.G0[Tpts], 1-Est.EBRT.New_5000.G1[Tpts], 1-Est.EBRT.New_5000.G2[Tpts], 
+                  1-Est.EBRT.New_5000.G3[Tpts]), 2) - 
+    round(c(1-True_Est.EBRT.G0[Tpts], 1-True_Est.EBRT.G1[Tpts], 1-True_Est.EBRT.G2[Tpts], 
+                  1-True_Est.EBRT.G3[Tpts]), 2),
+  
+  # RMSE_RP = round(c(RMSE(pava.RP.simNew_5000.G0, True_Est.RP.G0,Tpts),
+  #                    RMSE(pava.RP.simNew_5000.G1, True_Est.RP.G1,Tpts),
+  #                    RMSE(pava.RP.simNew_5000.G2, True_Est.RP.G2,Tpts),
+  #                    RMSE(pava.RP.simNew_5000.G3, True_Est.RP.G3,Tpts)), 2),
+  # 
+  # RMSE_EBRT = round(c(RMSE(pava.EBRT.simNew_5000.G0, True_Est.EBRT.G0,Tpts),
+  #                    RMSE(pava.EBRT.simNew_5000.G1, True_Est.EBRT.G1,Tpts),
+  #                    RMSE(pava.EBRT.simNew_5000.G2, True_Est.EBRT.G2,Tpts),
+  #                    RMSE(pava.EBRT.simNew_5000.G3, True_Est.EBRT.G3,Tpts)), 2),
+  
+  
+  RP_Coverage_5000 = round(c(coverage_rate.RP.New_5000.G0[Tpts], coverage_rate.RP.New_5000.G1[Tpts], 
+                              coverage_rate.RP.New_5000.G2[Tpts],coverage_rate.RP.New_5000.G3[Tpts]),2)*100,
+                      
+  EBRT_Coverage_5000 = round(c(coverage_rate.EBRT.New_5000.G0[Tpts], coverage_rate.EBRT.New_5000.G1[Tpts], 
+                          coverage_rate.EBRT.New_5000.G2[Tpts],coverage_rate.EBRT.New_5000.G3[Tpts]),2)*100,
+  
+  
+  RP_Bootstap_t_5000 = round(c(Sym.Boot.logit.coverage_rate.RP.New_5000.G0[Tpts],
+                          Sym.Boot.logit.coverage_rate.RP.New_5000.G1[Tpts],
+                          Sym.Boot.logit.coverage_rate.RP.New_5000.G2[Tpts],
+                          Sym.Boot.logit.coverage_rate.RP.New_5000.G3[Tpts]),2)*100,
+  
+  EBRT_Bootstap_t_5000 = round(c(Sym.Boot.logit.coverage_rate.EBRT.New_5000.G0[Tpts],
+                            Sym.Boot.logit.coverage_rate.EBRT.New_5000.G1[Tpts], 
+                            Sym.Boot.logit.coverage_rate.EBRT.New_5000.G2[Tpts],
+                            Sym.Boot.logit.coverage_rate.EBRT.New_5000.G3[Tpts]),2)*100
+  
+  
+)
+
+rtffile<-RTF("Performance fast.doc")
+addHeader(rtffile,title="Performance fast")
+addTable(rtffile, Performance,row.names = F, font.size=9, col.justify='R', header.col.justify='R')
+ done(rtffile)
+ 
+```
+
+```{r}
+## Put data together for plot
+sim.plot.dat_fun <- function(pava.EBRT.simG0, pava.EBRT.simG1, pava.EBRT.simG2, pava.EBRT.simG3,
+                         pava.RP.simG0, pava.RP.simG1, pava.RP.simG2, pava.RP.simG3, sample_size){
+  data.table(Time=rep(s,16),
+             `Survival Probability`=1-c(rowMeans(pava.EBRT.simG0),rowMeans(pava.EBRT.simG1),
+                                        rowMeans(pava.EBRT.simG2),rowMeans(pava.EBRT.simG3),                                     True_Est.EBRT.G0,True_Est.EBRT.G1,True_Est.EBRT.G2,True_Est.EBRT.G3,
+                                        rowMeans(pava.RP.simG0),rowMeans(pava.RP.simG1),
+                                      rowMeans(pava.RP.simG2),rowMeans(pava.RP.simG3),
+                                      True_Est.RP.G0,True_Est.RP.G1,True_Est.RP.G2,True_Est.RP.G3),
+           Data = rep(c("Simulated","Truth"), each=4*length(s), times=2),
+           Treatment=c(rep("EBRT + AD", 8*length(s)), rep("RP", 8*length(s))), 
+           Estimates=c(rep(c("Gamma = 0", "Gamma = -1", "Gamma = -2", "Gamma = -3"),
+                           each = length(s),times= 2),
+                       rep(c("Gamma = 0", "Gamma = 1", "Gamma = 2", "Gamma = 3"),
+                           each = length(s),times= 2))) %>% 
+  mutate(Estimates = factor(Estimates,levels = c("Gamma = 0", "Gamma = 1", "Gamma = 2","Gamma = 3",
+                                       "Gamma = -1", "Gamma = -2", "Gamma = -3")),
+         `Sample Size` = sample_size,
+         Data = factor(Data, levels = c("Truth", "Simulated")))
+}
+
+sim.plot.dat_1000 <- sim.plot.dat_fun(pava.EBRT.New_1000.simG0, pava.EBRT.New_1000.simG1, pava.EBRT.New_1000.simG2, pava.EBRT.New_1000.simG3, pava.RP.New_1000.simG0, pava.RP.New_1000.simG1, pava.RP.New_1000.simG2, pava.RP.New_1000.simG3, sample_size = "1000")
+
+sim.plot.dat_3000 <- sim.plot.dat_fun(pava.EBRT.New_3000.simG0, pava.EBRT.New_3000.simG1, pava.EBRT.New_3000.simG2, pava.EBRT.New_3000.simG3, pava.RP.New_3000.simG0, pava.RP.New_3000.simG1, pava.RP.New_3000.simG2, pava.RP.New_3000.simG3, sample_size = "3000")
+
+sim.plot.dat_5000 <- sim.plot.dat_fun(pava.EBRT.New_5000.simG0, pava.EBRT.New_5000.simG1, pava.EBRT.New_5000.simG2, pava.EBRT.New_5000.simG3, pava.RP.New_5000.simG0, pava.RP.New_5000.simG1, pava.RP.New_5000.simG2, pava.RP.New_5000.simG3, sample_size = "5000")
+
+sim.plot.dat_combine <- bind_rows(sim.plot.dat_1000, sim.plot.dat_3000, sim.plot.dat_5000)
+sim.plot.dat_combine <- split(sim.plot.dat_combine, f= sim.plot.dat_combine$Treatment)
+
+sim.plot1 <- ggplot(sim.plot.dat_combine$RP , aes(x= Time, y=`Survival Probability`,
+                                           color=Estimates, linetype = Data)) +
+  geom_line(linewidth= 0.5)+ 
+  ylim(0, 1) +
+  xlim(0,130)+
+  facet_grid(`Sample Size`~Treatment, scales = "fixed")+
+    labs(x = "Time (in months)", y = "Survival Probability", color = "Estimate") +
+    theme_classic()+
+  scale_color_manual(values = scales::hue_pal()(4),  labels = c(expression(paste(gamma[1], " = 0")), expression(paste(gamma[1], " = 1")),expression(paste(gamma[1], " = 2")),expression(paste(gamma[1], " = 3"))))+
+    theme(legend.position = c(0.33,0.10),
+          legend.box = "horizontal",
+          legend.key.size = unit(1, 'cm'), #change legend key size
+        legend.key.height = unit(0.5, 'cm'), #change legend key height
+        legend.key.width = unit(0.65, 'cm'), #change legend key width
+        legend.title = element_text(size=10, face= "bold"), #change legend title font size
+        legend.text = element_text(size=10), #change legend text font size
+      axis.text.x = element_text(size = 15, face="bold"),
+      axis.title.x = element_text(size = 15, face="bold"),
+      axis.text.y = element_text(size = 15, face="bold"),
+      axis.title.y = element_text(size = 15, face="bold"),
+        strip.text.x = element_text(size = 15, face="bold"),
+      strip.text.y = element_text(size = 15, face="bold")) 
+    
+
+sim.plot2 <- sim.plot1  %+% sim.plot.dat_combine$`EBRT + AD`
+sim.plot2.b <- sim.plot2 + labs(y=NULL) +theme(axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
+  scale_color_manual(values = scales::hue_pal()(4), labels = c(expression(paste(gamma[0], " = 0")), expression(paste(gamma[0], " = -1")),expression(paste(gamma[0], " = -2")),expression(paste(gamma[0], " = -3"))))
+plot1.b <- sim.plot1 + theme(strip.background.y = element_blank(), strip.text.y = element_blank())
+
+sim.plot2
+
+tiff("Simulated Plot.tiff", width = 12, height = 10, units = 'in',res = 600, compression = "lzw")
+
+grid.arrange(plot1.b,sim.plot2.b,ncol=2)
+
+dev.off()
+
+
+#saveRDS(sim.plot.dat_combine, "sim.plot.dat_combine.rds")
+
+```

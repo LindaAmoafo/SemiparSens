@@ -53,51 +53,52 @@ dev.off()
 
 
 ## Induced Counterfactual Plots
-Counter.plot.data <- bind_rows(Counter.plot.dat, ref_dat1) %>% 
+Counter.plot.data <- Counter.plot.dat %>% 
   mutate(`Treatment` = factor(`Treatment`, levels= c("RP", "EBRT + AD")),
-         Estimates = factor(Estimates, levels = c("P[Y(t) \u2265 s | T=t]", "Gamma...0", "Gamma...0.5", "Gamma...1","Gamma...1.5", "Gamma....0.5", "Gamma....1", "Gamma....1.5", "Gamma....2", "Gamma....3", "High Risk EBRT + AD Group", "Low Risk RP Group"), labels = c("P[Y(t) \u2265 s | T=t]","Gamma = 0", "Gamma = 0.5", "Gamma = 1","Gamma = 1.5", "Gamma = -0.5", "Gamma = -1", "Gamma = -1.5", "Gamma = -2", "Gamma = 3", "High Risk EBRT + AD Group", "Low Risk RP Group")))
+         Estimates = factor(Estimates, levels = c("P[Y(t) \u2265 s | T=t]","Gamma = 0", "Gamma = 0.5", "Gamma = 1", "Gamma = 1.5","Gamma = -0.5", "Gamma = -1", "Gamma = -1.5", "Gamma = -2","Gamma = -2.5")))
+
 
 Counter.plot.data_split <- split(Counter.plot.data, f= Counter.plot.data$Treatment)
 
-Counter.plot1 <- ggplot(Counter.plot.data_split$`RP` , 
+Counter.plot1 <- ggplot(data=Counter.plot.data_split$`RP` , 
                         aes(x= Time, y=`Survival Probability`, color=Estimates,
                             linetype = Estimates, size=Estimates)) +
-  geom_step()+ 
+  geom_step() +
   ylim(0, 1) +
+  #xlim(0,130) +
   scale_x_continuous(breaks=seq(0,120, 24), limits = c(0, 130)) +
   facet_wrap(~Treatment, scales = "fixed")+
-  labs(x = "Time", y = "Survival Probability", color = "Estimate") +
-  theme_bw() +
-  theme(legend.position = c(0.22, 0.25), legend.box = "horizontal") +
-  guides(colour = guide_legend(override.aes = list(linetype = c(1, 2,2,2,2, 1)))) + 
-  scale_linetype_manual(values= c("solid", rep("dashed", 4), "solid"), guide = FALSE)+
-  scale_size_manual(values = c(0.5,0.8,0.8,0.8,0.8, 0.5), guide=FALSE)+
-  scale_color_manual(values = c("red", "#003761","#005392", "#006fc3", "#008bf4", "grey"), guide=FALSE, labels = c("P[Y(t) \u2265 s | T=t]", expression(paste(gamma[1], " = 0")), expression(paste(gamma[1], " = 0.5")),expression(paste(gamma[1], " = 1")),expression(paste(gamma[1], " = 1.5")), "High Risk Survival")) +
+  labs(x = "Time (in months)", y = "Survival Probability", color = "Estimate") +
+  theme_bw()+
+  theme(legend.position = c(0.35,0.32),
+        legend.box = "horizontal") +
+  guides(colour = guide_legend(override.aes = list(linetype = c(1, 2,2,2,2))))+ 
+  scale_linetype_manual(values= c("solid", rep("dashed", 4)), guide = FALSE)+
+  scale_size_manual(values = c(0.5,0.8,0.8,0.8,0.8), guide=FALSE)+
+  scale_color_manual(values = c("red", "#045a8d","#2b8cbe", "#74a9cf", "#bdc9e1"), guide=FALSE, labels = c("P[Y(t) > s | T=t]",expression(paste(gamma[1], " = 0")), expression(paste(gamma[1], " = 0.5")),expression(paste(gamma[1], " = 1")),expression(paste(gamma[1], " = 1.5"))))+
   theme(legend.key.size = unit(2, 'cm'), #change legend key size
         legend.key.height = unit(1, 'cm'), #change legend key height
         legend.key.width = unit(2, 'cm'), #change legend key width
         legend.title = element_text(size=15, face= "bold"), #change legend title font size
         legend.text.align = 0,
         legend.text = element_text(size=12), #change legend text font size
-        axis.text.x = element_text(size = 18, face="bold"),
-        axis.title.x = element_text(size = 20, face="bold"),
-        axis.text.y = element_text(size = 18, face="bold"),
-        axis.title.y = element_text(size = 20, face="bold"),
-        strip.text.x = element_text(size = 18, face="bold"))
+        axis.text.x = element_text(size = 16, face="bold"),
+        axis.title.x = element_text(size = 18, face="bold"),
+        axis.text.y = element_text(size = 16, face="bold"),
+        axis.title.y = element_text(size = 18, face="bold"),
+        strip.text.x = element_text(size = 16, face="bold"))
 
 
-cbPalette_EBRT <- c("red", "#003761", "#006fc3",  "#26a2ff", "#57b7ff", "#6baed6", "#9ecae1", "grey")
-Counter.plot2 <- Counter.plot1  %+% Counter.plot.data_split$`EBRT + AD` + labs(y=NULL)+
-  guides(colour = guide_legend(override.aes = list(linetype = c(1, 2,2,2,2,2,2, 1)))) + 
-  scale_linetype_manual(values= c("solid", rep("dashed", 6), "solid"), guide = FALSE)+
-  scale_size_manual(values = c(0.5,0.8,0.8,0.8,0.8,0.8,0.8, 0.5), guide=FALSE)+
-  scale_color_manual(values = cbPalette_EBRT, guide=FALSE, labels = c("P[Y(t) \u2265 s | T=t]", expression(paste(gamma[0], " = 0")), expression(paste(gamma[0], " = -0.5")),expression(paste(gamma[0], " = -1")),expression(paste(gamma[0], " = -1.5")),expression(paste(gamma[0], " = -2")),expression(paste(gamma[0], " = -3")), "Low Risk Survival"))
+Counter.plot2 <- Counter.plot1  %+% Counter.plot.data_split$`EBRT + AD`+ labs(y=NULL) +
+  guides(colour = guide_legend(override.aes = list(linetype = c(1,2,2,2,2,2,2)))) + 
+  scale_linetype_manual(values= c(rep("solid", 1), rep("dashed", 6)), guide = FALSE)+
+  scale_size_manual(values = c(0.5,0.8,0.8,0.8,0.8,0.8,0.8), guide=FALSE)+
+  scale_color_manual(values = c("red", "#045a8d","#2b8cbe", "#74a9cf", "#bdc9e1", "#d0d1e6", "#f1eef6"), guide=FALSE, labels = c("P[Y(t) > s | T=t]",expression(paste(gamma[1], " = 0")), expression(paste(gamma[1], " = -0.5")),expression(paste(gamma[1], " = -1")),expression(paste(gamma[1], " = -1.5")), expression(paste(gamma[1], " = -2")), expression(paste(gamma[1], " = -2.5"))))
 
 
+png("Counter Plot.png", width = 10, height = 7, units = 'in',res = 600)
 
-png("Counter Plot.png", width = 15, height = 10, units = 'in',res = 300)
-
-grid.arrange(Counter.plot1,Counter.plot2,ncol=2)
+grid.arrange(Counter.plot1,Counter.plot2, ncol=2)
 
 dev.off()
 
@@ -112,7 +113,7 @@ axis(1, at = seq(0, 2.5,0.5), labels = -seq(0, 2.5,0.5))
 # Add custom y-axis
 axis(2)
 
-contour(gamma.grid.Neg, gamma.grid, diff), levels = 0, lwd = 3, add = T, col = "red")
+contour(gamma.grid.Neg, gamma.grid, diff, levels = 0, lwd = 3, add = T, col = "red")
 
 contour(gamma.grid.Neg, gamma.grid, Lower, lwd=3,label="", levels = 0, add = T, col = "blue")
 
